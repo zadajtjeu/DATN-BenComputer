@@ -91,7 +91,8 @@ jobs:
       - run:
           name: Test:phpcs
           command: |
-            ./vendor/bin/phpcs --standard=PSR2,PSR1 app/
+            ./vendor/bin/phpcs -d memory_limit=512M --standard=PSR2,PSR1 app/ tests/ config/
+            ./vendor/bin/phpcs --standard=PSR2,PSR1 resources/lang
       - run:
           name: Test:phpunit
           command: |
