@@ -9,7 +9,7 @@ use BenSampo\Enum\Enum;
  * @method static static OptionTwo()
  * @method static static OptionThree()
  */
-final class VocherStatus extends Enum
+final class VoucherStatus extends Enum
 {
     const AVAILABLE =   0;
     const EXPIRED =   1;
