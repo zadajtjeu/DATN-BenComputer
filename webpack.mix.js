@@ -11,12 +11,10 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js/bootstrap.js')
-    .postCss('resources/css/bootstrap.css', 'public/css/bootstrap.css')
-    .sourceMaps();
 mix.postCss('resources/css/default.css', 'public/css')
     .postCss('resources/css/responsive.css', 'public/css')
     .postCss('resources/css/style.css', 'public/css')
+    .postCss('resources/css/meanmenu.css', 'public/css')
     .postCss('resources/css/app.css', 'public/css/custom.css')
     .js('resources/js/modernizr.js', 'public/js')
     .js('resources/js/main.js', 'public/js')

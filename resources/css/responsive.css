@@ -606,6 +606,7 @@ display: none;
     }
     .footer-top {
       padding-bottom: 0;
+      text-align: center;
     }
     .footer-top .single-footer.mb-sm-40{
         margin-bottom: 20px;
