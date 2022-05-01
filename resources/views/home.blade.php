@@ -87,14 +87,14 @@
                 <div class="tab-menu mb-25">
                     <div class="section-ttitle">
                         <h2>{{ __('New Products') }}</h2>
-                   </div>
+                    </div>
                     <!-- Nav tabs -->
                     <ul class="nav tabs-area" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" data-bs-toggle="tab" href="#newest">{{ __('Newest') }} </a>
+                            <a class="nav-link active" data-toggle="tab" href="#newest">{{ __('Newest') }} </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#sellest">{{ __('Sellest') }}</a>
+                            <a class="nav-link" data-toggle="tab" href="#sellest">{{ __('Sellest') }}</a>
                         </li>
                     </ul>
 
@@ -124,7 +124,7 @@
                                         <!-- Product Image Start -->
                                         <div class="pro-img">
                                             <a id="wishList_producturl{{ $new->id }}"
-                                                href="">
+                                                href="{{ route('products.details', ['slug' => $new->slug, 'id' => $new->id]) }}">
                                                 <img id="wishList_image{{ $new->id }}" class="primary-img"
                                                     src="{{ $new->images[0]->url }}" alt="single-product"
                                                     height="276.45px">
@@ -139,7 +139,7 @@
                                         <!-- Product Content Start -->
                                         <div class="pro-content">
                                             <div class="pro-info">
-                                                <h4><a href="#">{{ $new->title }}</a>
+                                                <h4><a href="{{ route('products.details', ['slug' => $new->slug, 'id' => $new->id]) }}">{{ $new->title }}</a>
                                                 </h4>
                                                 <p>
                                                     @if ($new->promotion_price == 0)
@@ -170,7 +170,7 @@
                                                 <div class="actions-secondary">
                                                     <a style="cursor: pointer;" id="{{ $new->id }}"
                                                         onclick="add_Compare(this.id)"
-                                                        title="{{ __('home.addcompare') }}"><i
+                                                        title="{{ __('Add To Compare') }}"><i
                                                             class="lnr l nr-sync"></i>
                                                         <span>{{ __('Compare') }}</span></a>
                                                     <a style="cursor: pointer;" id="{{ $new->id }}"
@@ -216,7 +216,7 @@
                                         <!-- Product Image Start -->
                                         <div class="pro-img">
                                             <a id="wishList_producturl{{ $new->id }}"
-                                                href="">
+                                                href="{{ route('products.details', ['slug' => $new->slug, 'id' => $new->id]) }}">
                                                 <img id="wishList_image{{ $new->id }}" class="primary-img"
                                                     src="{{ $new->images[0]->url }}" alt="single-product"
                                                     height="276.45px">
@@ -231,7 +231,7 @@
                                         <!-- Product Content Start -->
                                         <div class="pro-content">
                                             <div class="pro-info">
-                                                <h4><a href="#">{{ $new->title }}</a>
+                                                <h4><a href="{{ route('products.details', ['slug' => $new->slug, 'id' => $new->id]) }}">{{ $new->title }}</a>
                                                 </h4>
                                                 <p>
                                                     @if ($new->promotion_price == 0)
@@ -262,7 +262,7 @@
                                                 <div class="actions-secondary">
                                                     <a style="cursor: pointer;" id="{{ $new->id }}"
                                                         onclick="add_Compare(this.id)"
-                                                        title="{{ __('home.addcompare') }}"><i
+                                                        title="{{ __('Add To Compare') }}"><i
                                                             class="lnr l nr-sync"></i>
                                                         <span>{{ __('Compare') }}</span></a>
                                                     <a style="cursor: pointer;" id="{{ $new->id }}"
