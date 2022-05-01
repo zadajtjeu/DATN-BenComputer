@@ -28,7 +28,7 @@ class AddAttributeVouchersTable extends Migration
      */
     public function down()
     {
-        if (Schema::hasColumn('condition')) {
+        if (Schema::hasColumn('condition', 'id')) {
             Schema::table('vouchers', function (Blueprint $table) {
                 $table->dropColumn('condition');
             });
