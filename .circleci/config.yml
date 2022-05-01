@@ -89,6 +89,10 @@ jobs:
 
       # run tests
       - run:
+          name: Test:node
+          command: |
+            npm run dev
+      - run:
           name: Test:phpcs
           command: |
             ./vendor/bin/phpcs -d memory_limit=512M --standard=PSR2,PSR1 app/ tests/ config/

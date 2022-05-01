@@ -4564,3 +4564,10 @@ a.shipping-calculator-button:hover {
   top: 6px;
   transition: all 0.3s ease-in 0s;
 }
+
+.pro-content {
+  min-height: 115px;
+  overflow: hidden;
+  padding: 20px 15px;
+  position: relative;
+}

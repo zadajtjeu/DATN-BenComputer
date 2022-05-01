@@ -39,7 +39,7 @@
     <!-- Jquery ui price slider css -->
     <link rel="stylesheet" href="{{ asset('templates/jquery-ui/themes/smoothness/jquery-ui.min.css') }}">
     <!-- Meanmenu css -->
-    <link rel="stylesheet" href="{{ asset('templates/jquery.meanmenu/meanmenu.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/meanmenu.css') }}">
     <!-- Nivo slider css -->
     <link rel="stylesheet" href="{{ asset('templates/nivo-slider/nivo-slider.css') }}">
     <!-- Owl carousel css -->
