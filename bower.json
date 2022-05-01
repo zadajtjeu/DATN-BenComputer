@@ -1,18 +1,32 @@
 {
-    "name": "bencomputer",
-    "description": "",
-    "main": "",
-    "authors": [
-        "NamBZ <nampt.me@gmail.com>"
-    ],
-    "license": "MIT",
-    "homepage": "https://github.com/NamBZ/DATN-BenComputer",
-    "ignore": [
-        "**/.*",
-        "node_modules",
-        "bower_components",
-        "public/templates/",
-        "test",
-        "tests"
-    ]
+  "name": "bencomputer",
+  "description": "",
+  "main": "",
+  "authors": [
+    "NamBZ <nampt.me@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/NamBZ/DATN-BenComputer",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/templates/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "font-awesome": "fontawesome#4.7.0",
+    "Ionicons": "ionicons#2.0.1",
+    "linearicons": "1.0.2",
+    "jquery-nice-select": "^1.1.0",
+    "fancybox": "jquery-fancyBox#^3.5.7",
+    "jquery-ui": "^1.12.1",
+    "nivo-slider": "*",
+    "owl.carousel": "2.2.1",
+    "toastr": "^2.1.3",
+    "jquery": "^3.6.0",
+    "jquery.meanmenu": "*",
+    "bootstrap": "5.1.3"
+  }
 }
