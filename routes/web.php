@@ -28,3 +28,9 @@ Route::get('language/{language}', [HomeController::class, 'changeLanguage'])->na
 Route::get('products/{slug}.p{id}.html', [ProductController::class, 'getDetails'])
     ->where(['id' => '[0-9]+'])
     ->name('products.details');
+
+Route::get('brands/{slug}.html', [ProductController::class, 'brandDetails'])
+    ->name('brands.details');
+
+Route::get('categories/{slug}.html', [ProductController::class, 'categoryDetails'])
+    ->name('categories.details');

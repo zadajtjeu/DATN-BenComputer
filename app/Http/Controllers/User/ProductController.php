@@ -16,10 +16,34 @@ class ProductController extends Controller
 
     public function getDetails($slug, $id)
     {
-        $product = $this->productRepo->getProductDetails($slug, $id);
+        $product_details = $this->productRepo->getProductDetails($slug, $id);
 
-        dd($product);
+        $product_ratings = $this->productRepo
+            ->getProductRatings(
+                $product_details->id,
+                config('pagination.rating_per_page')
+            );
 
-        return true;
+        $related_products = $this->productRepo
+            ->getRelatedProducts(
+                $product_details,
+                config('pagination.related')
+            );
+
+        return view('users.productdetails', [
+            'product_details' => $product_details,
+            'product_ratings' => $product_ratings,
+            'related_products' => $related_products,
+        ]);
+    }
+
+    public function brandDetails($slug)
+    {
+        //
+    }
+
+    public function categoryDetails($slug)
+    {
+        //
     }
 }
