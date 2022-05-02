@@ -172,7 +172,7 @@
                                         <li>
                                             <a href="{{ route('login')}}">
                                                 <i class="lnr lnr-user"></i>
-                                                <span class="my-cart"><span>
+                                                <span class="my-cart">
                                                     <span><strong>{{ __('Sign In') }}</strong>
                                                     {{ __('Or') }}</span>
                                                     <span> {{ __('Sign Up') }}</span>
