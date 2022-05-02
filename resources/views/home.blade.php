@@ -171,7 +171,7 @@
                                                     <a style="cursor: pointer;" id="{{ $new->id }}"
                                                         onclick="add_Compare(this.id)"
                                                         title="{{ __('Add To Compare') }}"><i
-                                                            class="lnr l nr-sync"></i>
+                                                            class="lnr lnr-sync"></i>
                                                         <span>{{ __('Compare') }}</span></a>
                                                     <a style="cursor: pointer;" id="{{ $new->id }}"
                                                         onclick="add_wishList(this.id)"
@@ -263,7 +263,7 @@
                                                     <a style="cursor: pointer;" id="{{ $new->id }}"
                                                         onclick="add_Compare(this.id)"
                                                         title="{{ __('Add To Compare') }}"><i
-                                                            class="lnr l nr-sync"></i>
+                                                            class="lnr lnr-sync"></i>
                                                         <span>{{ __('Compare') }}</span></a>
                                                     <a style="cursor: pointer;" id="{{ $new->id }}"
                                                         onclick="add_wishList(this.id)"
