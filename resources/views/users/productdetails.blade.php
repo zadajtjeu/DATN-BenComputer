@@ -286,7 +286,7 @@
                     <!-- Product Content Start -->
                     <div class="pro-content">
                         <div class="pro-info">
-                            <h4><a href="product.html">{{ $sptt->multisp }}</a></h4>
+                            <h4><a href="{{ route('products.details', ['slug' => $sptt->slug, 'id' => $sptt->id]) }}">{{ $sptt->multisp }}</a></h4>
                             @if ($sptt->promotion_price == 0)
                                 <span class="price">{{ currency_format($sptt->price) }}</span>
                             @else
