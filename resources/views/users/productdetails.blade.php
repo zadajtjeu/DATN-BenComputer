@@ -1,12 +1,12 @@
 @extends('layouts.app')
 @section('title')
-    {{ $product_details->title }}
+{{ $product_details->title }}
 @endsection
 @section('description')
-    {{ Str::words(strip_tags($product_details->title), 20) }}
+{{ Str::words(strip_tags($product_details->title), 20) }}
 @endsection
 @section('images')
-    {{ isset($product_details->images[0]) ? $product_details->images[0] : asset('themes/images/logo.png') }}
+{{ isset($product_details->images[0]) ? $product_details->images[0] : asset('themes/images/logo.png') }}
 @endsection
 @section('content')
 
