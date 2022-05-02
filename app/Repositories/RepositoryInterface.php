@@ -59,4 +59,10 @@ interface RepositoryInterface
      * @return mixed
      */
     public function where($column, $value);
+
+    /**
+     * Count
+     * @return init
+     */
+    public function count();
 }
