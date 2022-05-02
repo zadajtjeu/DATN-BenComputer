@@ -1,5 +1,8 @@
 <?php
 
+use App\Enums\UserRole;
+use App\Enums\UserStatus;
+
 if (!function_exists('currency_format')) {
     function currency_format($number, $suffix = 'đ')
     {
@@ -26,5 +29,27 @@ if (!function_exists('rating_star')) {
         }
 
         return $star;
+    }
+}
+
+if (!function_exists('isAdmin')) {
+    function isAdmin()
+    {
+        if (auth()->check() && auth()->user()->role == UserRole::ADMIN) {
+            return true;
+        }
+
+        return false;
+    }
+}
+
+if (!function_exists('isManager')) {
+    function isManager()
+    {
+        if (auth()->check() && auth()->user()->role == UserRole::MANAGER) {
+            return true;
+        }
+
+        return false;
     }
 }

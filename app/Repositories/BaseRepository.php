@@ -85,4 +85,9 @@ abstract class BaseRepository implements RepositoryInterface
     {
         return $this->model->where($column, $value)->get();
     }
+
+    public function count()
+    {
+        return $this->model->count();
+    }
 }
