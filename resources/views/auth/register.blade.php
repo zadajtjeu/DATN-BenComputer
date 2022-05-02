@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
-@section('title')
-{{ __('Sign Up') }}
-@endsection
+@section('title') {{ __('Sign Up') }} @endsection
 
 @section('content')
 <!-- Breadcrumb Start -->

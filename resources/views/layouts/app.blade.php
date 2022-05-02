@@ -74,16 +74,16 @@
                             <!-- Dropdown End -->
                             @auth
                                 <li>
-                                    <a href="#"><i class="far fa-id-card"></i> {{ __('Hi') }},
+                                    <a href="#"><i class="fa fa-id-card-o" aria-hidden="true"></i> {{ __('Hi') }},
                                         {{ Auth::user()->name }}
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" data-toggle="modal" data-target="#logoutModal"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> {{ __('Logout') }}</a>
+                                    <a href="#" data-toggle="modal" data-target="#logoutModal"><i class="fa fa-sign-out" aria-hidden="true"></i> {{ __('Logout') }}</a>
                                 </li>
-                                @if(Auth::user()->role == 1)
+                                @if(isAdmin() || isManager())
                                     <li>
-                                        <a href="{{ route('admin.dashboard') }}">{{ __('Dashboard') }}</a>
+                                        <a href="{{ route('admin.dashboard') }}"><i class="fa fa-tachometer" aria-hidden="true"></i> {{ __('Dashboard') }}</a>
                                     </li>
                                 @endif
                             @endauth
@@ -276,7 +276,19 @@
         <div class="main-page-banner home-3">
             <div class="container">
                 <div class="row">
-                    @include('layouts.clients.components.menu')
+                    <!-- Vertical Menu Start Here -->
+                    <div class="col-xl-3 col-lg-4 d-none d-lg-block">
+                        <div class="vertical-menu mb-all-30">
+                            <nav>
+                                <ul class="vertical-menu-list">
+                                    @foreach ($menu_categories as $category)
+                                        @include('layouts.clients.components.subcategory2', ['subcategory' => $category])
+                                    @endforeach
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <!-- Vertical Menu End Here -->
                 </div>
                 <!-- Row End -->
             </div>

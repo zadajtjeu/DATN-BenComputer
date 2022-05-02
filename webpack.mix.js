@@ -18,4 +18,5 @@ mix.postCss('resources/css/default.css', 'public/css')
     .postCss('resources/css/app.css', 'public/css/custom.css')
     .js('resources/js/modernizr.js', 'public/js')
     .js('resources/js/main.js', 'public/js')
-    .js('resources/js/plugins.js', 'public/js');
+    .js('resources/js/plugins.js', 'public/js')
+    .js('resources/js/admin.js', 'public/js');

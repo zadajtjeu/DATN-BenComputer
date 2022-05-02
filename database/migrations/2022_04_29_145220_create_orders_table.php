@@ -33,9 +33,13 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('proccess_user_id')->nullable();
             $table->foreign('proccess_user_id')
                 ->references('id')
-                ->on('users');
+                ->on('users')
+                ->nullOnDelete();
 
-            $table->foreignId('voucher_id')->nullable()->constrained();
+            $table->foreignId('voucher_id')
+                ->nullable()
+                ->constrained()
+                ->nullOnDelete();
             $table->foreignId('shipping_id')->constrained();
             $table->timestamps();
             $table->softDeletes();

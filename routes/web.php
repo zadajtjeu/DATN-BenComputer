@@ -35,7 +35,7 @@ Route::get('categories/{slug}.html', [ProductController::class, 'categoryDetails
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'adminAccess']], function () {
     Route::get('/', [Admin\AdminController::class, 'index'])->name('admin.dashboard');
-/*    Route::resource('categories', Admin\CategoryController::class)
+    Route::resource('categories', Admin\CategoryController::class)
         ->except(['show'])
         ->names([
             'index' => 'admin.categories.index',
@@ -45,7 +45,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'adminAccess']], fun
             'update' => 'admin.categories.update',
             'destroy' => 'admin.categories.destroy',
         ]);
-    Route::resource('products', Admin\ProductController::class)
+/*    Route::resource('products', Admin\ProductController::class)
         ->except(['show'])
         ->names([
             'index' => 'admin.products.index',

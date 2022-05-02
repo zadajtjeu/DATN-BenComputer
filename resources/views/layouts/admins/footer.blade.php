@@ -36,7 +36,11 @@
 
     <script src="{{ asset('templates/adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 
+    <script src="{{ asset('templates/adminlte/plugins/toastr/toastr.min.js') }}"></script>
+
     <script src="{{ asset('templates/adminlte/dist/js/adminlte.js?v=3.2.0') }}"></script>
+
+    <script src="{{ asset('js/admin.js') }}"></script>
 
     <script>
         $.widget.bridge('uibutton', $.ui.button);
@@ -45,7 +49,7 @@
 
     <script src="{{ asset('templates/adminlte/dist/js/demo.js') }}"></script>
 
-    <script src="{{ asset('templates/adminlte/dist/js/pages/dashboard.js') }}"></script>
+    @yield('addjs')
 
     @if(Session::has('success') || Session::has('info')
     || Session::has('warning') || Session::has('error'))

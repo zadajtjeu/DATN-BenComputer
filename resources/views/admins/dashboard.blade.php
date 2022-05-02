@@ -1,8 +1,6 @@
 @extends('layouts.admin')
 
-@section('title')
-{{ __('Dashboard') }}
-@endsection
+@section('title') {{ __('Dashboard') }} @endsection
 
 @section('page_title')
 {{ __('Dashboard') }}
@@ -241,4 +239,8 @@
 
 </div>
 
+@endsection
+
+@section('addjs')
+    <script src="{{ asset('templates/adminlte/dist/js/pages/dashboard.js') }}"></script>
 @endsection

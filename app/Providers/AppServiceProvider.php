@@ -118,7 +118,7 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrap();
 
         //lang
-        view()->composer(['layouts.app', 'layouts.clients.components.menu'], function ($view) {
+        view()->composer(['layouts.app'], function ($view) {
 
             $menu_categories = Category::with('children')->whereNull('parent_id')
                 ->get();

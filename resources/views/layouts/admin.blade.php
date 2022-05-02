@@ -22,7 +22,26 @@
             </ul>
 
             <ul class="navbar-nav ml-auto">
-
+                <!-- Language -->
+                @if (Route::has('language'))
+                    <li class="nav-item dropdown">
+                        <a id="languageDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            @if (App::isLocale('vi'))
+                                {{ __('Vietnamese') }}
+                            @else
+                                {{ __('English') }}
+                            @endif
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
+                            <li>
+                                <a class="dropdown-item" href="{{ route('language', ['en']) }}"> {{ __('English') }}</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route('language', ['vi']) }}"> {{ __('Vietnamese') }}</a>
+                            </li>
+                        </ul>
+                    </li>
+                @endif
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
                         <i class="far fa-bell"></i>
@@ -148,7 +167,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                        <a href="{{ route('admin.categories.index') }}" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>{{ __('Categories') }}</p>
                                         </a>

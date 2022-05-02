@@ -8,6 +8,8 @@ use App\Repositories\Product\ProductRepositoryInterface;
 
 class ProductController extends Controller
 {
+    protected $productRepo;
+
     public function __construct(
         ProductRepositoryInterface $productRepo
     ) {
