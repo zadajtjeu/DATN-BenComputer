@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
-@section('title')
-{{ __('Confirm Password') }}
-@endsection
+@section('title') {{ __('Confirm Password') }} @endsection
 
 @section('content')
 <!-- Breadcrumb Start -->

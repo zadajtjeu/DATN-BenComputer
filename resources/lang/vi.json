@@ -889,6 +889,18 @@
     "Vouchers" : "Mã giảm giá",
     "Order" : "Đơn hàng",
     "Product" : "Sản phẩm",
+    "Category Management" : "Quản lý danh mục",
+    "Slug" : "Đường dẫn",
+    "Parent Category" : "Danh mục cha",
+    "None" : "Không",
+    "The name is how it appears on your site" : "Tên hiển thị trên trang",
+    "The “slug” is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens" : "“Slug” là thân thiện với URL dựa theo. Bao gồm chữ thường, số và ngăn bởi gạch nối",
+    "Categories can have a hierarchy. You might have a Jazz category, and under that have children categories for Bebop and Big Band. Totally optional" : "Các danh mục có thể có một hệ thống phân cấp. Bạn có mục Laptop Gaming trong thư mục Laptop. Hoàn toàn tùy chọn",
+    "Comfirm Delete Category" : "Xác nhận xóa danh mục",
+    "An error has occurred please try again later" : "Đã xảy ra lỗi vui lòng thử lại sau",
+    "Add category successfully": "Thêm danh mục thành công",
+    "Update category successfully": "Sửa danh mục thành công",
+    "Delete category successfully": "Xóa danh mục thành công",
     "" : "",
     "" : ""
 }

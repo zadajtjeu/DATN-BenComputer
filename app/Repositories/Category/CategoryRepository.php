@@ -10,4 +10,39 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
     {
         return \App\Models\Category::class;
     }
+
+    public function getRootCategoriesWith()
+    {
+        return $this->model->with('children')->whereNull('parent_id')->get();
+    }
+
+    public function getChildrenCategoriesID($parent_id)
+    {
+        if ($parent_id) {
+            $list_category_id[] = (int)$parent_id;
+            $list_children = $this->model->where('parent_id', $parent_id)->get();
+
+            if ($list_children->isNotEmpty()) {
+                foreach ($list_children as $sub_cate) {
+                    $list_category_id = array_merge($list_category_id, $this->getChildrenCategoriesID($sub_cate->id));
+                }
+            }
+
+            return $list_category_id;
+        }
+
+        return [];
+    }
+
+    public function updateChildrenNullWhenDetele($parent_id)
+    {
+        if ($parent_id) {
+            $this->model->where('parent_id', $parent_id)
+                ->update(['parent_id' => null]);
+
+            return true;
+        }
+
+        return false;
+    }
 }

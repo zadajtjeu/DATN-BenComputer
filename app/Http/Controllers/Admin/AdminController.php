@@ -10,6 +10,10 @@ use App\Repositories\User\UserRepositoryInterface;
 
 class AdminController extends Controller
 {
+    protected $productRepo;
+    protected $orderRepo;
+    protected $userRepo;
+
     public function __construct(
         ProductRepositoryInterface $productRepo,
         OrderRepositoryInterface $orderRepo,

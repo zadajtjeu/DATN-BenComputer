@@ -5,7 +5,9 @@
     <div class="main-page-banner pb-50 off-white-bg">
         <div class="container">
             <div class="row">
-                @include('layouts.clients.components.menu')
+                <div class="col-xl-3 col-lg-4 d-none d-lg-block">
+                    <script>document.getElementsByClassName("vertical-menu-list")[0].style.display = "block";</script>
+                </div>
                 <!-- Slider Area Start Here -->
                 @include('layouts.clients.components.slider')
                 <!-- Slider Area End Here -->

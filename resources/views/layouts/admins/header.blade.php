@@ -26,6 +26,10 @@
 
     <link rel="stylesheet" href="{{ asset('templates/adminlte/plugins/summernote/summernote-bs4.min.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('templates/adminlte/plugins/toastr/toastr.min.css') }}">
+
+    @yield('addcss')
+
 </head>
 
 

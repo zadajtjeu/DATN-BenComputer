@@ -350,10 +350,10 @@ ul {
     box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.1);
 }
 
-.header-top > ul > li:hover ul.ht-dropdown,
-.cart-box ul li:hover ul.ht-dropdown,
+.header-top > ul > li:hover > ul.ht-dropdown,
+.cart-box ul li:hover > ul.ht-dropdown,
 .vertical-menu-list > li:hover > ul.ht-dropdown,
-.vertical-menu-list ul.ht-dropdown.mega-child li:hover ul.ht-dropdown,
+.vertical-menu-list ul.ht-dropdown.mega-child li:hover > ul.ht-dropdown,
 .header-bottom-list li:hover > ul.ht-dropdown {
     opacity: 1;
     visibility: visible;
@@ -4570,4 +4570,16 @@ a.shipping-calculator-button:hover {
   overflow: hidden;
   padding: 20px 15px;
   position: relative;
+}
+
+@media (min-width: 992px) {
+    .vertical-menu-list .ht-dropdown.mega-child {
+        left: 290px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .vertical-menu-list .ht-dropdown.mega-child {
+        left: 255px;
+    }
 }

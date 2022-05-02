@@ -1,7 +1,5 @@
 @extends('layouts.app')
-@section('title')
-{{ __('Sign In') }}
-@endsection
+@section('title') {{ __('Sign In') }} @endsection
 
 @section('content')
 

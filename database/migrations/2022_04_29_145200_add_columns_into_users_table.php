@@ -31,9 +31,10 @@ class AddColumnsIntoUsersTable extends Migration
      */
     public function down()
     {
-        if (Schema::hasColumn('phone', 'address', 'role', 'status')) {
+        if (Schema::hasColumn('phone', 'address', 'role', 'status', 'deleted_at')) {
             Schema::table('users', function (Blueprint $table) {
                 $table->dropColumn(['phone', 'address', 'role', 'status']);
+                $table->dropSoftDeletes();
             });
         }
     }
