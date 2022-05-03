@@ -23,7 +23,7 @@
                 <form method="post" action="{{ route('admin.categories.store') }}">
                     @csrf
                     <div class="form-group">
-                        <label for="name">{{ __('Name') }}</label>
+                        <label for="name"><span class="text-danger">*</span> {{ __('Name') }}</label>
                         <input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required>
                         @error('name')
                             <span class="error invalid-feedback" role="alert">
@@ -43,7 +43,7 @@
                         <small class="form-text text-muted">{{ __('The “slug” is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens') }}</small>
                     </div>
                     <div class="form-group">
-                        <label for="parent">{{ __('Parent Category') }}</label>
+                        <label for="parent"><span class="text-danger">*</span> {{ __('Parent Category') }}</label>
                         <select id="parent" name="parent_id" class="form-control custom-select @error('parent_id') is-invalid @enderror" required>
                             <option value='0'>———{{ __('None') }}———</option>
                             @foreach ($categories as $key => $category) {
@@ -124,30 +124,6 @@
             });
         });
         $(document).ready(function() {
-
-            function change_alias( alias )
-            {
-                var str = alias;
-                str= str.toLowerCase();
-                str= str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g,"a");
-                str= str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g,"e");
-                str= str.replace(/ì|í|ị|ỉ|ĩ/g,"i");
-                str= str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ợ|ở|ỡ|ớ/g,"o");
-                str= str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g,"u");
-                str= str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g,"y");
-                str= str.replace(/đ/g,"d");
-                str= str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'| |\"|\&|\#|\[|\]|~|$|_/g,"-");
-                /* tìm và thay thế các kí tự đặc biệt trong chuỗi sang kí tự - */
-                str = str.replace(/\-\-\-\-\-/gi, '-');
-                str = str.replace(/\-\-\-\-/gi, '-');
-                str = str.replace(/\-\-\-/gi, '-');
-                str = str.replace(/\-\-/gi, '-');
-                str= str.replace(/-+-/g,"-"); //thay thế 2- thành 1-
-                str= str.replace(/^\-+|\-+$/g,"");
-                //cắt bỏ ký tự - ở đầu và cuối chuỗi
-                return str;
-            }
-
             $("input#name").keyup(function() {
                 var value = $(this).val();
                 var nodeUrl = $("input#slug");

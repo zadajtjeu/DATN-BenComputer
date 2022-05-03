@@ -4,3 +4,16 @@ a {
     background-color: transparent;
     -webkit-text-decoration-skip: objects;
 }
+html {
+    position: relative;
+    min-height: 100%;
+    text-decoration: none;
+}
+
+* {
+    word-wrap:break-word;
+}
+
+img {
+    max-width: 100%;
+}
