@@ -1,6 +1,7 @@
 <?php
 namespace App\Repositories\Product;
 
+use Storage;
 use App\Repositories\BaseRepository;
 
 class ProductRepository extends BaseRepository implements ProductRepositoryInterface
@@ -43,5 +44,32 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
             ->get();
 
         return $related_products;
+    }
+
+    public function findAndDeleteImage($product_id, $image_id)
+    {
+        $product = $this->findOrFail($product_id);
+
+        $image = $product->images->find($image_id);
+
+        if ($image && $product->images->count() > 1) {
+            Storage::delete('products/' . $image->name);
+
+            $image->delete();
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public function createImage($product_id, $image_info)
+    {
+        $product = $this->findOrFail($product_id);
+
+        $product->images()->create([
+            'name' => $image_info['name'],
+            'url' => $image_info['url'],
+        ]);
     }
 }

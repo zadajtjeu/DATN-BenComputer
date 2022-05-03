@@ -46,7 +46,18 @@ $(document).ready(function() {
         if ($('.form-upload__preview').find('.form-upload__item').length == 0) {
             $('.btn-clear').addClass('d-none').removeClass('d-block');
         }
-    })
+    });
+
+    /** add active class and stay opened when selected */
+    var url = window.location;
+    // for sidebar menu entirely but not cover treeview
+    $('.sidebar ul.nav-sidebar a').filter(function() {
+        return (this.href == url || url.href.indexOf(this.href) == 0) && !this.href.includes("#");
+    }).addClass('active');
+    // for treeview
+    $('.sidebar ul.nav-treeview a').filter(function() {
+        return (this.href == url || url.href.indexOf(this.href) == 0) && !this.href.includes("#");
+    }).parentsUntil(".nav-sidebar > .nav-treeview").addClass('menu-open').prev('a').addClass('active');
 });
 
 window.change_alias = function(alias) {
