@@ -46,9 +46,8 @@
                         <label for="parent"><span class="text-danger">*</span> {{ __('Parent Category') }}</label>
                         <select id="parent" name="parent_id" class="form-control custom-select @error('parent_id') is-invalid @enderror" required>
                             <option value='0'>———{{ __('None') }}———</option>
-                            @foreach ($categories as $key => $category) {
+                            @foreach ($categories as $key => $category)
                                 @include('layouts.admins.components.categoryoption', ['subcategory' => $category, 'prefix' => ''])
-                            }
                             @endforeach
                         </select>
                         @error('parent_id')

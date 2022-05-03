@@ -65,6 +65,19 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'adminAccess']], fun
             'update' => 'admin.posttypes.update',
             'destroy' => 'admin.posttypes.destroy',
         ]);
+    Route::resource('products', Admin\ProductController::class)
+        ->except(['show'])
+        ->names([
+            'index' => 'admin.products.index',
+            'create' => 'admin.products.create',
+            'store' => 'admin.products.store',
+            'edit' => 'admin.products.edit',
+            'update' => 'admin.products.update',
+            'destroy' => 'admin.products.destroy',
+        ]);
+    Route::delete('products/edit/{product_id}/deleteImage/{image_id}',
+        [Admin\ProductController::class, 'deleteImage']
+    )->name('admin.products.deleteImage');
 /*    Route::resource('products', Admin\ProductController::class)
         ->except(['show'])
         ->names([

@@ -38,7 +38,7 @@
         <div class="thumb-bg">
             <div class="row">
                 <a href="sosanh" id="pagesosanh{{ $product_details->id }}" style="visibility: hidden;"></a>
-                <input type="hidden" id="wishList_product_name{{ $product_details->id }}" value="{{ $product_details->multisp }}" >
+                <input type="hidden" id="wishList_product_name{{ $product_details->id }}" value="{{ $product_details->title }}" >
                 <input type="hidden" id="wishList_price{{ $product_details->id }}" value="{{ ($product_details->promotion_price == 0) ? currency_format($product_details->price) : currency_format($product_details->promotion_price) }}" >
 
                 <input type="hidden" id="instock{{ $product_details->id }}" value="{{ ($product_details->quantity >= $product_details->sold) ? __('In stock') : __('Out stock') }}">
@@ -93,7 +93,7 @@
                                     <span class="price">{{ currency_format($product_details->price) }}</span>
                                 @else
                                     <span class="prev-price">{{ currency_format($product_details->price) }}</span>
-                                    <span class="price">{{ currency_format($product_details->promotion_price) }}</span><span class="saving-price">{{ __('Save') }} {{ number_format(100-($product_details->promotion_price/$product_details->unit_price)*100) }} %</span>
+                                    <span class="price">{{ currency_format($product_details->promotion_price) }}</span><span class="saving-price">{{ __('Save') }} {{ number_format(100-($product_details->promotion_price/$product_details->price)*100) }} %</span>
                                 @endif
                             </p>
                         </div>
@@ -282,7 +282,7 @@
                     <!-- Product Content Start -->
                     <div class="pro-content">
                         <div class="pro-info">
-                            <h4><a href="{{ route('products.details', ['slug' => $sptt->slug, 'id' => $sptt->id]) }}">{{ $sptt->multisp }}</a></h4>
+                            <h4><a href="{{ route('products.details', ['slug' => $sptt->slug, 'id' => $sptt->id]) }}">{{ $sptt->title }}</a></h4>
                             @if ($sptt->promotion_price == 0)
                                 <span class="price">{{ currency_format($sptt->price) }}</span>
                             @else
