@@ -55,6 +55,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'adminAccess']], fun
             'update' => 'admin.brands.update',
             'destroy' => 'admin.brands.destroy',
         ]);
+    Route::resource('posttypes', Admin\PostTypeController::class)
+        ->except(['show'])
+        ->names([
+            'index' => 'admin.posttypes.index',
+            'create' => 'admin.posttypes.create',
+            'store' => 'admin.posttypes.store',
+            'edit' => 'admin.posttypes.edit',
+            'update' => 'admin.posttypes.update',
+            'destroy' => 'admin.posttypes.destroy',
+        ]);
 /*    Route::resource('products', Admin\ProductController::class)
         ->except(['show'])
         ->names([
