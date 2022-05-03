@@ -45,6 +45,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'adminAccess']], fun
             'update' => 'admin.categories.update',
             'destroy' => 'admin.categories.destroy',
         ]);
+    Route::resource('brands', Admin\BrandController::class)
+        ->except(['show'])
+        ->names([
+            'index' => 'admin.brands.index',
+            'create' => 'admin.brands.create',
+            'store' => 'admin.brands.store',
+            'edit' => 'admin.brands.edit',
+            'update' => 'admin.brands.update',
+            'destroy' => 'admin.brands.destroy',
+        ]);
 /*    Route::resource('products', Admin\ProductController::class)
         ->except(['show'])
         ->names([

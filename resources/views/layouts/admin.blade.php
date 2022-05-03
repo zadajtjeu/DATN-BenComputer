@@ -161,7 +161,7 @@
                                 </li>
                                 @if (isAdmin())
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                        <a href="{{ route('admin.brands.index') }}" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>{{ __('Brands') }}</p>
                                         </a>

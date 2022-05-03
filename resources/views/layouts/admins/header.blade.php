@@ -28,6 +28,21 @@
 
     <link rel="stylesheet" href="{{ asset('templates/adminlte/plugins/toastr/toastr.min.css') }}">
 
+    <style>
+        html {
+            position: relative;
+            min-height: 100%;
+            text-decoration: none;
+        }
+
+        * {
+            word-wrap:break-word;
+        }
+
+        img {
+            max-width: 100%;
+        }
+    </style>
     @yield('addcss')
 
 </head>

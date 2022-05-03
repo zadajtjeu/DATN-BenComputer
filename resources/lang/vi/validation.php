@@ -167,5 +167,6 @@ return [
         'year' => 'năm',
         'slug' => 'đường dẫn',
         'parent_id' => 'cha',
+        'image' => 'ảnh',
     ],
 ];
