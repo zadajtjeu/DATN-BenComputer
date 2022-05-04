@@ -119,7 +119,7 @@
                                         <input type="hidden" id="wishList_price{{ $new->id }}"
                                             value="{{ ($new->promotion_price == 0) ? currency_format($new->price) : currency_format($new->promotion_price) }}">
 
-                                        <input type="hidden" id="instock{{ $new->id }}" value="{{ ($new->quantity >= $new->sold) ? __('In stock') : __('Out stock') }}">
+                                        <input type="hidden" id="instock{{ $new->id }}" value="{{ ($new->quantity > 0) ? __('In stock') : __('Out stock') }}">
                                         <input type="hidden" id="mota{{ $new->id }}" value="{{ $new->specifications }}">
 
 
@@ -161,7 +161,7 @@
                                             <div class="pro-actions">
                                                 <div class="actions-primary">
                                                     @if ($new->quantity > 0)
-                                                        <a id="addcart{{ $new->id }}" href="" title="{{ __('Add to cart') }}"> + {{ __('Add to cart') }}
+                                                        <a id="addcart{{ $new->id }}" href="{{ route('cart.add', [$new->id]) }}" title="{{ __('Add to cart') }}"> + {{ __('Add to cart') }}
                                                         </a>
                                                     @else
                                                         <a id="addcart{{ $new->id }}" class="disabled-link">
@@ -211,7 +211,7 @@
                                         <input type="hidden" id="wishList_price{{ $new->id }}"
                                             value="{{ ($new->promotion_price == 0) ? currency_format($new->price) : currency_format($new->promotion_price) }}">
 
-                                        <input type="hidden" id="instock{{ $new->id }}" value="{{ ($new->quantity >= $new->sold) ? __('In stock') : __('Out stock') }}">
+                                        <input type="hidden" id="instock{{ $new->id }}" value="{{ ($new->quantity > 0) ? __('In stock') : __('Out stock') }}">
                                         <input type="hidden" id="mota{{ $new->id }}" value="{{ $new->specifications }}">
 
 
@@ -253,7 +253,7 @@
                                             <div class="pro-actions">
                                                 <div class="actions-primary">
                                                     @if ($new->quantity > 0)
-                                                        <a id="addcart{{ $new->id }}" href="" title="{{ __('Add to cart') }}"> + {{ __('Add to cart') }}
+                                                        <a id="addcart{{ $new->id }}" href="{{ route('cart.add', [$new->id]) }}" title="{{ __('Add to cart') }}"> + {{ __('Add to cart') }}
                                                         </a>
                                                     @else
                                                         <a id="addcart{{ $new->id }}" class="disabled-link">

@@ -10,4 +10,15 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     {
         return \App\Models\User::class;
     }
+
+    public function checkAuthVoucherUsed($voucher_id)
+    {
+        $order = auth()->user()->orders()->find($voucher_id);
+
+        if (!empty($order)) {
+            return true;
+        }
+
+        return false;
+    }
 }
