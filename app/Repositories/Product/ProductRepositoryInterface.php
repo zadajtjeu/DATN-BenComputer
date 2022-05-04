@@ -18,4 +18,6 @@ interface ProductRepositoryInterface extends RepositoryInterface
     public function getWithImages($product_id);
 
     public function getAllIn($array_id);
+
+    public function updateProductQuantity($product_id, $quantity = 0, $sold = 0);
 }

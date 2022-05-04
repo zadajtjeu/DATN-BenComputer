@@ -16,4 +16,16 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
     {
         return $this->model->where('status', OrderStatus::NEW_ORDER)->count();
     }
+
+    public function updateOrderPaymentStatus($order_id, $status)
+    {
+        $order = $this->find($order_id);
+        $order->status = $status;
+
+        if ($order->save()) {
+            return true;
+        }
+
+        return false;
+    }
 }

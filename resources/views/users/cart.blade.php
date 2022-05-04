@@ -156,7 +156,7 @@
                                     </tbody>
                                 </table>
                                 <div class="wc-proceed-to-checkout">
-                                    <form action="" method="post">
+                                    <form action="{{ route('cart.checkout') }}" method="post">
                                         @csrf
                                         <button type="submit">{{ __('Ship COD') }}</button>
                                         <button type="submit" name="method" value="online">{{ __('Oneline Payment') }}</button>

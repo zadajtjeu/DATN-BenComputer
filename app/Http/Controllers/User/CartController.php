@@ -22,6 +22,8 @@ class CartController extends Controller
 
     protected $voucherRepo;
 
+    protected $userRepo;
+
     public function __construct(
         ProductRepositoryInterface $productRepo,
         UserRepositoryInterface $userRepo,
@@ -329,5 +331,18 @@ class CartController extends Controller
 
         return redirect()->back()
             ->with('message_success', __('Deleted Successfully'));
+    }
+
+    public function checkoutMethod(Request $request)
+    {
+        $request->session()->forget('pay');
+
+        if ($request->has('method') && $request->method == 'online') {
+            $pay = $request->session()->get('pay');
+
+            $request->session()->put('pay', 'online');
+        }
+
+        return redirect()->route('checkout.form');
     }
 }
