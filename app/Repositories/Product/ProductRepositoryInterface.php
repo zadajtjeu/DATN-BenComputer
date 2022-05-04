@@ -14,4 +14,8 @@ interface ProductRepositoryInterface extends RepositoryInterface
     public function findAndDeleteImage($product_id, $image_id);
 
     public function createImage($product_id, $image_info);
+
+    public function getWithImages($product_id);
+
+    public function getAllIn($array_id);
 }

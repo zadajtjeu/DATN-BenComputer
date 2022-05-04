@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\ProductController;
+use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\Admin;
 
 /*
@@ -107,4 +108,35 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'adminAccess']], fun
         ->name('admin.orders.viewOrder');
     Route::post('order-manager/view-order/{id}', [Admin\OrderController::class, 'update'])
         ->name('admin.orders.update');*/
+});
+
+// User function
+Route::group(['middleware' => ['auth']], function () {
+    // Cart
+    Route::get('cart', [CartController::class, 'index'])->name('cart.index');
+    Route::get('cart/add/{product_id}', [CartController::class, 'add'])->name('cart.add');
+    Route::get('cart/minus/{product_id}', [CartController::class, 'minus'])->name('cart.minus');
+    Route::get('cart/delete/{id}', [CartController::class, 'delete'])->name('cart.delete');
+    Route::get('cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+    Route::post('cart/order', [CartController::class, 'order'])->name('cart.order');
+    Route::post('cart/voucher', [CartController::class, 'voucherApply'])->name('cart.voucher');
+    Route::delete('cart/voucher/delete', [CartController::class, 'voucherDetele'])->name('cart.voucher.delete');
+/*
+    // Profile
+    Route::get('profile', [ProfileController::class, 'editProfile'])->name('profile');
+    Route::patch('profile', [ProfileController::class, 'updateProfile'])->name('profile.update');
+    Route::get('profile/change-password', [ProfileController::class, 'editPassword'])->name('password.edit');
+    Route::put('profile/change-password', [ProfileController::class, 'updatePassword'])
+        ->name('profile.password.update');
+
+    // User
+    Route::get('user', [UserController::class, 'index'])->name('user');
+    Route::get('user/purchase', [UserController::class, 'purchase'])->name('user.purchase');
+    Route::get('user/order/{id}', [UserController::class, 'orderDetail'])->name('user.purchase.details');
+    Route::post('user/order/{id}/cancel', [UserController::class, 'orderCancel'])->name('user.purchase.cancel');
+    //Rating
+    Route::get('user/rating', [RatingController::class, 'index'])->name('user.rating');
+    Route::get('user/rating/{order_id}', [RatingController::class, 'showAllOrder'])->name('user.rating.view');
+    Route::post('user/rating/{order_items_id}', [RatingController::class, 'addRating'])->name('user.rating.send');
+    */
 });

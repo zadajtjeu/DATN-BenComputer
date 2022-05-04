@@ -57,11 +57,14 @@
                                     </td>
                                     <td><a href="{{ route('products.details', ['slug' => $product->slug, 'id' => $product->id]) }}">{{ $product->title }}</a></td>
                                     <td>
-                                        {{ $product->quantity }}
-                                        @if ($product->sold > 0 && $product->sold < $product->quantity)
-                                            /{{ $product->sold }} {{ __('sold') }}
-                                        @elseif ($product->sold >= $product->quantity)
+                                        @if ($product->quantity > 0)
+                                            {{ $product->quantity }}
+                                        @else
                                             <span class="badge badge-danger">{{ __('Out Stock') }}</span>
+                                        @endif
+
+                                        @if ($product->sold > 0)
+                                            /{{ $product->sold }} {{ __('sold') }}
                                         @endif
                                     </td>
                                     <td>

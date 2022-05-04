@@ -72,4 +72,14 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
             'url' => $image_info['url'],
         ]);
     }
+
+    public function getWithImages($product_id)
+    {
+        return $this->model->with('images')->findOrFail($product_id);
+    }
+
+    public function getAllIn($array_id)
+    {
+        return $this->model->with('images')->whereIn('id', $array_id)->get();
+    }
 }

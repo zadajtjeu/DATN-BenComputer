@@ -59,7 +59,7 @@
     <!-- Modernizer js -->
     <script src="{{ asset('js/modernizr.js') }}"></script>
     <!-- Notification -->
-    <script src="{{ asset('templates/toastr/toastr.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('templates/toastr/toastr.css') }}">
 
 
 </head>

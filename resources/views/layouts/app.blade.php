@@ -48,7 +48,7 @@
                         <ul>
                             <li><a href="#">{{ __('Free shipping for orders over 1 million') }}</a></li>
                             @if(Session('cart'))
-                                <li><a href="{{ route('cart') }}">{{ __('Cart') }}</a></li>
+                                <li><a href="{{ route('cart.index') }}">{{ __('Cart') }}</a></li>
                             @endif
                         </ul>
                         <ul>
@@ -127,35 +127,37 @@
                                         <span class="my-cart">
                                             <span class="total-pro">
                                                 @if(Session::has('cart'))
-                                                    {{ Session('cart')->totalQty }}
+                                                    {{ count(Session('cart')) }}
                                                 @else
                                                     0
                                                 @endif
                                             </span>
                                             <span>{{ __('Cart')}}</span></span>
                                         </a>
-                                        @if(Auth::check() && Session::has('cart') )
+                                        @if(Auth::check() && Session::has('cart'))
                                             <ul class="ht-dropdown cart-box-width">
                                                 <li>
-                                                    @foreach($product_cart as $poroduct)
-                                                    <!-- Cart Box Start -->
-                                                    <div class="single-cart-box">
-                                                        <div class="cart-img">
-                                                            <a href="#"><img src="source/image/product/{{$poroduct['item']['image']}}" alt="cart-image"></a>
-                                                            <span class="pro-quantity">{{$poroduct['qty']}}X</span>
+                                                    @php $item_count = 0 @endphp
+                                                    @foreach(Session::get('cart') as $cart_item)
+                                                        <!-- Cart Box Start -->
+                                                        <div class="single-cart-box">
+                                                            <div class="cart-img">
+                                                                <a href="{{ route('products.details', ['slug' => $cart_item->slug, 'id' => $cart_item->id]) }}"><img src="{{ empty($cart_item->images) ? '' : $cart_item->images[0]->url }}" alt="{{ $cart_item->title }}"></a>
+                                                                <span class="pro-quantity">x{{ $cart_item->selected_quantity }}</span>
+                                                            </div>
+                                                            <div class="cart-content">
+                                                                <h6><a href="{{ route('products.details', ['slug' => $cart_item->slug, 'id' => $cart_item->id]) }}">{{ $cart_item->title }} </a></h6>
+                                                                <span class="cart-price">{{ ($cart_item->promotion_price == 0) ? currency_format($cart_item->price) : currency_format($cart_item->promotion_price) }}</span>
+                                                            </div>
+                                                            <a class="del-icone" href="{{ route('cart.delete', $cart_item->id) }}"><i class="ion-close"></i></a>
                                                         </div>
-                                                        <div class="cart-content">
-                                                            <h6><a href="product.html">{{$poroduct['item']->$multisp }} </a></h6>
-                                                            <span class="cart-price">@if($poroduct['item']['promotion_price']==0){{ number_format($poroduct['item']['unit_price'])}} VNĐ @else {{ number_format($poroduct['item']['promotion_price'])}} VNĐ @endif</span>
-                                                        </div>
-                                                        <a class="del-icone" href="{{ route('xoagiohang',$poroduct['item']['id'])}}"><i class="ion-close"></i></a>
-                                                    </div>
-                                                    <!-- Cart Box End -->
+                                                        @php if (++$item_count == 2) break; @endphp
+                                                        <!-- Cart Box End -->
                                                     @endforeach
                                                     <!-- Cart Footer Inner Start -->
                                                     <div class="cart-footer">
                                                         <div class="cart-actions text-center">
-                                                            <a class="cart-checkout" href="{{ route('shoppingcart')}}">{{ __('home.chitiet')}}</a>
+                                                            <a class="cart-checkout" href="{{ route('cart.index')}}">{{ __('Details')}}</a>
                                                         </div>
                                                     </div>
                                                     <!-- Cart Footer Inner End -->

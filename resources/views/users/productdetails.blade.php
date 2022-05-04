@@ -41,7 +41,7 @@
                 <input type="hidden" id="wishList_product_name{{ $product_details->id }}" value="{{ $product_details->title }}" >
                 <input type="hidden" id="wishList_price{{ $product_details->id }}" value="{{ ($product_details->promotion_price == 0) ? currency_format($product_details->price) : currency_format($product_details->promotion_price) }}" >
 
-                <input type="hidden" id="instock{{ $product_details->id }}" value="{{ ($product_details->quantity >= $product_details->sold) ? __('In stock') : __('Out stock') }}">
+                <input type="hidden" id="instock{{ $product_details->id }}" value="{{ ($product_details->quantity > 0) ? __('In stock') : __('Out stock') }}">
                  <input type="hidden" id="mota{{ $product_details->id }}" value="{!! $product_details->specifications !!}">
 
                 <!-- Main Thumbnail Image Start -->
@@ -102,7 +102,7 @@
                             <div class="pro-actions">
                                 <div class="actions-primary">
                                     @if ($product_details->quantity > 0)
-                                        <a id="addcart{{ $product_details->id }}" href="#"
+                                        <a id="addcart{{ $product_details->id }}" href="{{ route('cart.add', [$product_details->id]) }}"
                                         title="" data-original-title="{{ __('Add To Cart') }}"> + {{ __('Add To Cart') }}</a>
                                     @else
                                         <a id="addcart{{ $product_details->id }}" class="disabled-link"> + {{ __('Add To Cart') }}</a>
@@ -268,7 +268,7 @@
                     <input type="hidden" id="wishList_product_name{{ $sptt->id }}" value="{{ $sptt->title }}" >
                     <input type="hidden" id="wishList_price{{ $sptt->id }}" value="{{ ($sptt->promotion_price == 0) ? currency_format($sptt->price) : currency_format($sptt->promotion_price) }}" >
 
-                    <input type="hidden" id="instock{{ $sptt->id }}" value="{{ ($sptt->quantity >= $sptt->sold) ? __('In stock') : __('Out stock') }}">
+                    <input type="hidden" id="instock{{ $sptt->id }}" value="{{ ($sptt->quantity > 0) ? __('In stock') : __('Out stock') }}">
                      <input type="hidden" id="mota{{ $sptt->id }}" value="{{ $sptt->specifications }}">
                     <!-- Product Image Start -->
                     <div class="pro-img">
@@ -293,7 +293,7 @@
                         <div class="pro-actions">
                             <div class="actions-primary">
                                 @if ($sptt->quantity > 0)
-                                    <a id="addcart{{ $sptt->id }}" href="" title="{{ __('Add to cart') }}"> + {{ __('Add to cart') }}
+                                    <a id="addcart{{ $sptt->id }}" href="{{ route('cart.add', [$sptt->id]) }}" title="{{ __('Add to cart') }}"> + {{ __('Add to cart') }}
                                     </a>
                                 @else
                                     <a id="addcart{{ $sptt->id }}" class="disabled-link">
