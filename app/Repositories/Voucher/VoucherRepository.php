@@ -18,6 +18,24 @@ class VoucherRepository extends BaseRepository implements VoucherRepositoryInter
         $voucher->quantity -= 1;
         $voucher->used += 1;
 
-        $voucher->save();
+        if ($voucher->save()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function updateQuantityRevert($voucher_id)
+    {
+        $voucher = $this->find($voucher_id);
+
+        $voucher->quantity += 1;
+        $voucher->used -= 1;
+
+        if ($voucher->save()) {
+            return true;
+        }
+
+        return false;
     }
 }

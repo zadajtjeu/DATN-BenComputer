@@ -366,8 +366,8 @@ class CheckoutController extends Controller
                     ]);
 
                     // Update product quantity
-                    $product_quantity_update = $product->quantity - $cart[$product->id]->selected_quantity;
-                    $product_sold_update = $product->sold + $cart[$product->id]->selected_quantity;
+                    $product_quantity_update = -$cart[$product->id]->selected_quantity;
+                    $product_sold_update = $cart[$product->id]->selected_quantity;
 
                     $this->productRepo->updateProductQuantity(
                         $product->id,
@@ -392,7 +392,7 @@ class CheckoutController extends Controller
                 // Render link vnpay
 
                 $vnp_TxnRef = $order->id;
-                $vnp_OrderInfo = "Order#$order->code";
+                $vnp_OrderInfo = "Order#$order->order_code";
                 $vnp_OrderType = "Laptop";
                 $vnp_Locale = config('app.locale');
                 $vnp_IpAddr = $request->ip();

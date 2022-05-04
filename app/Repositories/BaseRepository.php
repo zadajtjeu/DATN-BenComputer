@@ -90,4 +90,19 @@ abstract class BaseRepository implements RepositoryInterface
     {
         return $this->model->count();
     }
+
+    public function forceUpdate($id, $array_value_with_key)
+    {
+        $result = $this->findOrFail($id);
+
+        foreach ($array_value_with_key as $key => $value) {
+            $result->{$key} = $value;
+        }
+
+        if ($result->save()) {
+            return true;
+        }
+
+        return false;
+    }
 }

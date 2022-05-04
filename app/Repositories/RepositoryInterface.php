@@ -65,4 +65,6 @@ interface RepositoryInterface
      * @return init
      */
     public function count();
+
+    public function forceUpdate($id, $array_value_with_key);
 }
