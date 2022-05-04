@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\ProductController;
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\CheckoutController;
+use App\Http\Controllers\User\OrderController;
 use App\Http\Controllers\Admin;
 
 /*
@@ -128,6 +129,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('checkout/json/provinces', [CheckoutController::class, 'getProvinces'])->name('checkout.provinces');
     Route::get('checkout/json/districts/{id}', [CheckoutController::class, 'getDistricts'])->name('checkout.districts');
     Route::get('checkout/json/wards/{id}', [CheckoutController::class, 'getWards'])->name('checkout.wards');
+
+    // User
+    Route::get('user', [ProfileController::class, 'profile'])->name('profile');
+    Route::get('user/orderhistory', [OrderController::class, 'index'])->name('user.orderhistory');
+    Route::get('user/orderdetails/{id}', [OrderController::class, 'getDetails'])->name('user.orderdetails');
+    Route::delete('user/ordercancel/{id}', [OrderController::class, 'cancel'])->name('user.ordercancel');
+    Route::post('user/orderrepay/{id}', [OrderController::class, 'repayment'])->name('user.orderrepay');
+    Route::post('user/ordercod/{id}', [OrderController::class, 'switchCOD'])->name('user.ordercod');
 /*
     // Profile
     Route::get('profile', [ProfileController::class, 'editProfile'])->name('profile');

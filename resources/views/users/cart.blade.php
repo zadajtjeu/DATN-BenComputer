@@ -17,7 +17,7 @@
 </div>
 <!-- Breadcrumb End -->
 <!-- Cart Main Area Start -->
-<div class="cart-main-area ptb-100 ptb-sm-60">
+<div class="cart-main-area ptb-20 ptb-sm-60">
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-sm-12">

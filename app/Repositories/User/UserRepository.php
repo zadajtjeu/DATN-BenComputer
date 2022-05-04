@@ -13,9 +13,9 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
     public function checkAuthVoucherUsed($voucher_id)
     {
-        $order = auth()->user()->orders()->find($voucher_id);
+        $order = auth()->user()->orders()->where('voucher_id', $voucher_id)->first();
 
-        if (!empty($order)) {
+        if (!empty($order->id)) {
             return true;
         }
 

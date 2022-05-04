@@ -124,7 +124,7 @@
                                     <ul class="footer-list">
                                         <li><a href="contact.html">{{ __('Contact Us') }}</a></li>
                                         <li><a href="#">{{ __('Returns') }}</a></li>
-                                        <li><a href="#">{{ __('Order History') }}</a></li>
+                                        <li><a href="{{ route('user.orderhistory') }}">{{ __('Order History') }}</a></li>
                                         <li><a href="wishlist.html">{{ __('Wish List') }}</a></li>
                                         <li><a href="#">{{ __('Site Map') }}</a></li>
                                         <li><a href="#">{{ __('Gift Certificates') }}</a></li>

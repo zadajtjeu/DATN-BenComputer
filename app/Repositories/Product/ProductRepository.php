@@ -87,8 +87,8 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
     {
         $product = $this->find($product_id);
 
-        $product->quantity = $quantity;
-        $product->sold = $sold;
+        $product->quantity += $quantity;
+        $product->sold += $sold;
 
         if ($product->save()) {
             return true;
