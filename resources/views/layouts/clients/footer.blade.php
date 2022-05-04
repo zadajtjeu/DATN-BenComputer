@@ -300,3 +300,4 @@
             });
         </script>
     @endif
+    @yield('addjs')

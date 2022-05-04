@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\ProductController;
 use App\Http\Controllers\User\CartController;
+use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\Admin;
 
 /*
@@ -117,10 +118,16 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('cart/add/{product_id}', [CartController::class, 'add'])->name('cart.add');
     Route::get('cart/minus/{product_id}', [CartController::class, 'minus'])->name('cart.minus');
     Route::get('cart/delete/{id}', [CartController::class, 'delete'])->name('cart.delete');
-    Route::get('cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
-    Route::post('cart/order', [CartController::class, 'order'])->name('cart.order');
     Route::post('cart/voucher', [CartController::class, 'voucherApply'])->name('cart.voucher');
     Route::delete('cart/voucher/delete', [CartController::class, 'voucherDetele'])->name('cart.voucher.delete');
+    //Checkout
+    Route::post('cart/checkout', [CartController::class, 'checkoutMethod'])->name('cart.checkout');
+    Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout.form');
+    Route::post('checkout', [CheckoutController::class, 'addOrder'])->name('checkout.form');
+    Route::get('checkout/online', [CheckoutController::class, 'vnpayReturn'])->name('checkout.vnpayReturn');
+    Route::get('checkout/json/provinces', [CheckoutController::class, 'getProvinces'])->name('checkout.provinces');
+    Route::get('checkout/json/districts/{id}', [CheckoutController::class, 'getDistricts'])->name('checkout.districts');
+    Route::get('checkout/json/wards/{id}', [CheckoutController::class, 'getWards'])->name('checkout.wards');
 /*
     // Profile
     Route::get('profile', [ProfileController::class, 'editProfile'])->name('profile');

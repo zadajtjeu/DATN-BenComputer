@@ -82,4 +82,18 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
     {
         return $this->model->with('images')->whereIn('id', $array_id)->get();
     }
+
+    public function updateProductQuantity($product_id, $quantity = 0, $sold = 0)
+    {
+        $product = $this->find($product_id);
+
+        $product->quantity = $quantity;
+        $product->sold = $sold;
+
+        if ($product->save()) {
+            return true;
+        }
+
+        return false;
+    }
 }

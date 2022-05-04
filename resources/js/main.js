@@ -559,7 +559,7 @@ NOTE: main.js, All custom script and plugin activation script in this file.
     /*----------------------------
     17. Nice Select Activation
     ------------------------------ */
-    $('select').niceSelect();
+    /*$('select').niceSelect();*/
     
     /*----------------------------
     18. Price Slider Activation

@@ -10,4 +10,14 @@ class VoucherRepository extends BaseRepository implements VoucherRepositoryInter
     {
         return \App\Models\Voucher::class;
     }
+
+    public function updateQuantity($voucher_id)
+    {
+        $voucher = $this->find($voucher_id);
+
+        $voucher->quantity -= 1;
+        $voucher->used += 1;
+
+        $voucher->save();
+    }
 }
