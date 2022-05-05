@@ -10,4 +10,6 @@ interface OrderRepositoryInterface extends RepositoryInterface
     public function getFullAuthOrderWithPaginate($paginate);
 
     public function getFullAuthOrderDetails($id);
+
+    public function getOrderByStatusPaginate($status, $paginate);
 }

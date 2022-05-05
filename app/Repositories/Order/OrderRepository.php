@@ -43,4 +43,11 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
             ->with('orderItems')
             ->findOrFail($id);
     }
+
+    public function getOrderByStatusPaginate($status, $paginate)
+    {
+        return $this->model->where('status', $status)
+            ->orderBy('created_at', 'DESC')
+            ->paginate($paginate);
+    }
 }
