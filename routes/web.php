@@ -6,6 +6,7 @@ use App\Http\Controllers\User\ProductController;
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\OrderController;
+use App\Http\Controllers\User\RatingController;
 use App\Http\Controllers\Admin;
 
 /*
@@ -144,6 +145,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::delete('user/ordercancel/{id}', [OrderController::class, 'cancel'])->name('user.ordercancel');
     Route::post('user/orderrepay/{id}', [OrderController::class, 'repayment'])->name('user.orderrepay');
     Route::post('user/ordercod/{id}', [OrderController::class, 'switchCOD'])->name('user.ordercod');
+
+    // rating
+    Route::get('user/rate/{id}', [RatingController::class, 'index'])->name('user.rate');
+    Route::post('user/rate/{id}/create', [RatingController::class, 'create'])->name('user.rate.create');
 /*
     // Profile
     Route::get('profile', [ProfileController::class, 'editProfile'])->name('profile');

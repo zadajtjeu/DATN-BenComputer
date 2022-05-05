@@ -10,7 +10,7 @@
             <ul class="d-flex align-items-center">
                 <li><a href="{{ route('home') }}">{{ __('Home') }}</a></li>
                 <li><a href="{{ route('profile') }}">{{ __('Profile') }}</a></li>
-                <li class="active"><a href="{{ route('user.orderhistory') }}">{{ __('Order Details') }}</a></li>
+                <li class="active"><a href="{{ route('user.orderhistory') }}">{{ __('Order History') }}</a></li>
             </ul>
         </div>
     </div>
@@ -76,7 +76,7 @@
                                     <!-- end col -->
                                 </div>
                             </div>
-                            <div class="list-group-item">
+                            <div class="list-group-item p-0">
                                 @if ($orderDetails->orderItems->isNotEmpty())
                                     @php
                                         $orderDetails->orderItems->load('product');
@@ -86,11 +86,11 @@
                                             @php
                                                 $product = $item->product;
                                             @endphp
-                                            <div class="row col-12">
-                                                <a title="{{ $product->title }}" href="{{ route('products.details', [$product->slug, $product->id]) }}" class="product-image-container col-2 text-decoration-none">
+                                            <div class="row col-12 border m-0">
+                                                <a title="{{ $product->title }}" href="{{ route('products.details', [$product->slug, $product->id]) }}" class="product-image-container col-lg-2 col-sm-3 text-decoration-none">
                                                     <img alt="{{ $product->title }}" src="{{ $product->images[0]->url }}" class="card-img-top">
                                                 </a>
-                                                <div class="product-details-content col-7 pr0">
+                                                <div class="product-details-content col-lg-7 col-sm-6 pr0">
                                                     <div class="row item-title no-margin">
                                                         <a href="{{ route('products.details', [$product->slug, $product->id]) }}" title="{{ $product->title }}" class="unset col-12 no-padding text-decoration-none">
                                                             <span class="fs20 fw6 link-color">{{ $product->title }}</span>
@@ -102,11 +102,16 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="product-price fs18 col-3">
-                                                    <span class="text-danger">{{ currency_format($item->buying_price) }}</span>
+                                                <div class="product-price fs18 col-lg-3 col-sm-3 row">
+                                                    <span class="text-danger col-6 col-sm-12">{{ currency_format($item->buying_price) }}</span>
+
+                                                    @if ($orderDetails->status == App\Enums\OrderStatus::COMPLETED)
+                                                        <div class="col-6 col-sm-12">
+                                                            <a class="btn btn-warning" href="{{ route('user.rate', [$item->id]) }}"><i class="fa fa-star" aria-hidden="true"></i> {{ $item->rate_status == App\Enums\RateStatus::ALLOW ? __('Rate') : __('View Rate') }}</a>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             </div>
-                                            <hr>
                                         @endforeach
                                     </div>
                                 @else

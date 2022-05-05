@@ -16,7 +16,7 @@ if (!function_exists('rating_star')) {
         $star = '';
         foreach (range(1, 5) as $rate) {
             if ($avg_rate >= $rate) {
-                $star .= '<i class="fa fa-star"></i>';
+                $star .= ' <i class="fa fa-star"></i>';
             } elseif ($avg_rate == $rate - 0.5) {
                 $star .= ' <i class="fa fa-star-half-o"></i>';
             } else {

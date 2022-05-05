@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Support\Facades\Gate;
 use App\Repositories\Brand\BrandRepository;
 use App\Repositories\Brand\BrandRepositoryInterface;
 use App\Repositories\Image\ImageRepository;
@@ -126,6 +127,10 @@ class AppServiceProvider extends ServiceProvider
             $view->with([
                 'menu_categories'=>$menu_categories,
             ]);
+        });
+
+        Gate::define('add-rating', function ($user, $order) {
+            return $user->id == $order->user_id;
         });
     }
 }
