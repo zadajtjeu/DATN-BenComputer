@@ -990,5 +990,12 @@
     "Order is updated" : "Đơn hàng đã được cập nhập",
     "Payment" : "Thanh toán",
     "Date" : "Ngày",
+    "Status is invalid" : "Trạng thái không hợp lệ",
+    "Process" : "Xử lý",
+    "Processed by :username" : "Đã được xử lý bởi :username",
+    "Print" : "In",
+    "Order status" : "Trạng thái",
+    "" : "",
+    "" : "",
     "" : ""
 }

@@ -81,6 +81,18 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'adminAccess']], fun
     Route::delete('products/edit/{product_id}/deleteImage/{image_id}',
         [Admin\ProductController::class, 'deleteImage']
     )->name('admin.products.deleteImage');
+
+    Route::get('orders', [Admin\OrderController::class, 'index'])->name('admin.orders.index');
+    Route::get('orders/new', [Admin\OrderController::class, 'getNewOrders'])->name('admin.orders.new');
+    Route::get('orders/process', [Admin\OrderController::class, 'getProcessOrder'])->name('admin.orders.process');
+    Route::get('orders/shipping', [Admin\OrderController::class, 'getShippingOrder'])->name('admin.orders.shipping');
+    Route::get('orders/details/{id}', [Admin\OrderController::class, 'getDetails'])
+        ->name('admin.orders.details');
+    Route::delete('orders/details/{id}', [Admin\OrderController::class, 'cancel'])->name('admin.orders.cancel');
+    Route::post('orders/details/cod/{id}', [Admin\OrderController::class, 'switchCOD'])->name('admin.orders.cod');
+    Route::patch('orders/details/{id}', [Admin\OrderController::class, 'update'])->name('admin.orders.update');
+    Route::get('orders/print/{id}', [Admin\OrderController::class, 'print'])
+        ->name('admin.orders.print');
 /*    Route::resource('products', Admin\ProductController::class)
         ->except(['show'])
         ->names([
@@ -104,12 +116,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'adminAccess']], fun
     Route::patch('user/{id}/block', [Admin\UserController::class, 'blockUser'])
         ->name('admin.users.block');
     Route::patch('user/{id}/unblock', [Admin\UserController::class, 'unblockUser'])
-        ->name('admin.users.unblock');
-    Route::get('order-manager', [Admin\OrderController::class, 'index'])->name('admin.orders.index');
-    Route::get('order-manager/view-order/{id}', [Admin\OrderController::class, 'viewOrder'])
-        ->name('admin.orders.viewOrder');
-    Route::post('order-manager/view-order/{id}', [Admin\OrderController::class, 'update'])
-        ->name('admin.orders.update');*/
+        ->name('admin.users.unblock');*/
 });
 
 // User function

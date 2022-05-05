@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Admin;
 
 use DB;
 use Exception;
@@ -8,6 +8,7 @@ use App\Enums\OrderStatus;
 use App\Enums\PaymentStatus;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Repositories\Product\ProductRepositoryInterface;
 use App\Repositories\Order\OrderRepositoryInterface;
 use App\Repositories\Voucher\VoucherRepositoryInterface;
@@ -33,9 +34,39 @@ class OrderController extends Controller
     public function index()
     {
         $orders = $this->orderRepo
-            ->getFullAuthOrderWithPaginate(config('pagination.per_page'));
+            ->paginate(config('pagination.per_page'));
 
-        return view('users.orders.orderhistory', [
+        return view('admins.orders.index', [
+            'orders' => $orders,
+        ]);
+    }
+
+    public function getNewOrders()
+    {
+        $orders = $this->orderRepo
+            ->getOrderByStatusPaginate(OrderStatus::NEW_ORDER, config('pagination.per_page'));
+
+        return view('admins.orders.index', [
+            'orders' => $orders,
+        ]);
+    }
+
+    public function getProcessOrder()
+    {
+        $orders = $this->orderRepo
+            ->getOrderByStatusPaginate(OrderStatus::IN_PROCCESS, config('pagination.per_page'));
+
+        return view('admins.orders.index', [
+            'orders' => $orders,
+        ]);
+    }
+
+    public function getShippingOrder()
+    {
+        $orders = $this->orderRepo
+            ->getOrderByStatusPaginate(OrderStatus::IN_SHIPPING, config('pagination.per_page'));
+
+        return view('admins.orders.index', [
             'orders' => $orders,
         ]);
     }
@@ -43,26 +74,25 @@ class OrderController extends Controller
     public function getDetails($id)
     {
         $orderDetails = $this->orderRepo
-            ->getFullAuthOrderDetails($id);
+            ->findOrFail($id);
 
-        return view('users.orders.details', [
+        return view('admins.orders.details', [
             'orderDetails' => $orderDetails,
         ]);
     }
 
     public function cancel(Request $request, $id)
     {
-        $order = $this->orderRepo->getFullAuthOrderDetails($id);
+        $order = $this->orderRepo->findOrFail($id);
 
-        if ($order->status != OrderStatus::NEW_ORDER &&
-            $order->status != OrderStatus::IN_PROCCESS) {
+        if ($order->status == OrderStatus::COMPLETED) {
             return redirect()->back()->with('error', __('Failed to cancel this order'));
         }
 
         $order_update = [
             'status' => OrderStatus::CANCELED,
+            'proccess_user_id' => Auth::id(),
         ];
-
 
         if ($order->payment == 'online' && $order->payment_status != PaymentStatus::SUCCESS) {
             $order_update['payment_status'] = PaymentStatus::FAIL;
@@ -107,61 +137,9 @@ class OrderController extends Controller
         return redirect()->back()->with('success', __('Order is canceled'));
     }
 
-    public function repayment(Request $request, $id)
-    {
-        $order = $this->orderRepo->getFullAuthOrderDetails($id);
-
-        // Render link vnpay
-
-        $vnp_TxnRef = $order->id;
-        $vnp_OrderInfo = "Order#$order->order_code";
-        $vnp_OrderType = "Laptop2";
-        $vnp_Locale = config('app.locale');
-        $vnp_IpAddr = $request->ip();
-
-        $inputData = array(
-            "vnp_Version" => "2.0.0",
-            "vnp_TmnCode" => env('VNP_TMN_CODE'),
-            "vnp_Amount" => $order->promotion_price,
-            "vnp_Command" => "pay",
-            "vnp_CreateDate" => date('YmdHis'),
-            "vnp_CurrCode" => "VND",
-            "vnp_IpAddr" => $vnp_IpAddr,
-            "vnp_Locale" => $vnp_Locale,
-            "vnp_OrderInfo" => $vnp_OrderInfo,
-            "vnp_OrderType" => $vnp_OrderType,
-            "vnp_ReturnUrl" => route('checkout.vnpayReturn'),
-            "vnp_TxnRef" => $vnp_TxnRef,
-        );
-
-        ksort($inputData);
-
-        $query = "";
-        $i = 0;
-        $hashdata = "";
-        foreach ($inputData as $key => $value) {
-            if ($i == 1) {
-                $hashdata .= '&' . $key . "=" . $value;
-            } else {
-                $hashdata .= $key . "=" . $value;
-                $i = 1;
-            }
-            $query .= urlencode($key) . "=" . urlencode($value) . '&';
-        }
-
-
-        $vnp_Url = env('VNP_URL') . "?" . $query;
-        if (env('VNP_HASH_SECRET')) {
-            $vnpSecureHash = hash('sha256', env('VNP_HASH_SECRET') . $hashdata);
-            $vnp_Url .= 'vnp_SecureHashType=SHA256&vnp_SecureHash=' . $vnpSecureHash;
-        }
-
-        return redirect($vnp_Url);
-    }
-
     public function switchCOD($id)
     {
-        $order = $this->orderRepo->getFullAuthOrderDetails($id);
+        $order = $this->orderRepo->findOrFail($id);
 
         if ($order->payment != 'online'
             && $order->payment_status != PaymentStatus::PROCCESSING
@@ -174,5 +152,41 @@ class OrderController extends Controller
         }
 
         return redirect()->back()->with('error', __('Update failed'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $order = $this->orderRepo->findOrFail($id);
+
+        if (!in_array($request->status, OrderStatus::getValues())) {
+            return redirect()->back()->with('error', __('Status is invalid'));
+        }
+        if ($order->status == OrderStatus::CANCELED) {
+            return redirect()->back()->with('error', __('Failed to cancel this order'));
+        }
+
+        $order_update = [
+            'status' => $request->status,
+            'proccess_user_id' => Auth::id(),
+        ];
+
+        try {
+            $this->orderRepo->forceUpdate($order->id, $order_update);
+        } catch (Exception $e) {
+            return redirect()->back()
+                ->with('error', __('There are some errors. Please try again later!'));
+        }
+
+        return redirect()->back()->with('success', __('Order is updated'));
+    }
+
+    public function print($id)
+    {
+        $order = $this->orderRepo->findOrFail($id);
+
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadView('admins.orders.invoice', ['order' => $order]);
+
+        return $pdf->stream();
     }
 }
