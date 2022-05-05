@@ -22,6 +22,7 @@ class Voucher extends Model
         'start_date',
         'end_date',
         'quantity',
+        'condition',
     ];
 
     public function orders()
