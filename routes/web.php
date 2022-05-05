@@ -39,36 +39,7 @@ Route::get('categories/{slug}.html', [ProductController::class, 'categoryDetails
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'adminAccess']], function () {
     Route::get('/', [Admin\AdminController::class, 'index'])->name('admin.dashboard');
-    Route::resource('categories', Admin\CategoryController::class)
-        ->except(['show'])
-        ->names([
-            'index' => 'admin.categories.index',
-            'create' => 'admin.categories.create',
-            'store' => 'admin.categories.store',
-            'edit' => 'admin.categories.edit',
-            'update' => 'admin.categories.update',
-            'destroy' => 'admin.categories.destroy',
-        ]);
-    Route::resource('brands', Admin\BrandController::class)
-        ->except(['show'])
-        ->names([
-            'index' => 'admin.brands.index',
-            'create' => 'admin.brands.create',
-            'store' => 'admin.brands.store',
-            'edit' => 'admin.brands.edit',
-            'update' => 'admin.brands.update',
-            'destroy' => 'admin.brands.destroy',
-        ]);
-    Route::resource('posttypes', Admin\PostTypeController::class)
-        ->except(['show'])
-        ->names([
-            'index' => 'admin.posttypes.index',
-            'create' => 'admin.posttypes.create',
-            'store' => 'admin.posttypes.store',
-            'edit' => 'admin.posttypes.edit',
-            'update' => 'admin.posttypes.update',
-            'destroy' => 'admin.posttypes.destroy',
-        ]);
+
     Route::resource('products', Admin\ProductController::class)
         ->except(['show'])
         ->names([
@@ -94,30 +65,68 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'adminAccess']], fun
     Route::patch('orders/details/{id}', [Admin\OrderController::class, 'update'])->name('admin.orders.update');
     Route::get('orders/print/{id}', [Admin\OrderController::class, 'print'])
         ->name('admin.orders.print');
-/*    Route::resource('products', Admin\ProductController::class)
-        ->except(['show'])
-        ->names([
-            'index' => 'admin.products.index',
-            'create' => 'admin.products.create',
-            'store' => 'admin.products.store',
-            'edit' => 'admin.products.edit',
-            'update' => 'admin.products.update',
-            'destroy' => 'admin.products.destroy',
-        ]);
-    Route::resource('users', Admin\UserController::class)
-        ->except(['show'])
-        ->names([
-            'index' => 'admin.users.index',
-            'create' => 'admin.users.create',
-            'store' => 'admin.users.store',
-            'edit' => 'admin.users.edit',
-            'update' => 'admin.users.update',
-            'destroy' => 'admin.users.destroy',
-        ]);
-    Route::patch('user/{id}/block', [Admin\UserController::class, 'blockUser'])
-        ->name('admin.users.block');
-    Route::patch('user/{id}/unblock', [Admin\UserController::class, 'unblockUser'])
-        ->name('admin.users.unblock');*/
+
+    // Only for admin
+    Route::middleware(['auth', 'isAdmin'])->group(function () {
+        Route::resource('categories', Admin\CategoryController::class)
+            ->except(['show'])
+            ->names([
+                'index' => 'admin.categories.index',
+                'create' => 'admin.categories.create',
+                'store' => 'admin.categories.store',
+                'edit' => 'admin.categories.edit',
+                'update' => 'admin.categories.update',
+                'destroy' => 'admin.categories.destroy',
+            ]);
+        Route::resource('brands', Admin\BrandController::class)
+            ->except(['show'])
+            ->names([
+                'index' => 'admin.brands.index',
+                'create' => 'admin.brands.create',
+                'store' => 'admin.brands.store',
+                'edit' => 'admin.brands.edit',
+                'update' => 'admin.brands.update',
+                'destroy' => 'admin.brands.destroy',
+            ]);
+        Route::resource('posttypes', Admin\PostTypeController::class)
+            ->except(['show'])
+            ->names([
+                'index' => 'admin.posttypes.index',
+                'create' => 'admin.posttypes.create',
+                'store' => 'admin.posttypes.store',
+                'edit' => 'admin.posttypes.edit',
+                'update' => 'admin.posttypes.update',
+                'destroy' => 'admin.posttypes.destroy',
+            ]);
+        Route::resource('vouchers', Admin\VoucherController::class)
+            ->except(['show'])
+            ->names([
+                'index' => 'admin.vouchers.index',
+                'create' => 'admin.vouchers.create',
+                'store' => 'admin.vouchers.store',
+                'edit' => 'admin.vouchers.edit',
+                'update' => 'admin.vouchers.update',
+                'destroy' => 'admin.vouchers.destroy',
+            ]);
+        Route::patch('vouchers/block/{id}', [Admin\VoucherController::class, 'block'])->name('admin.vouchers.block');
+        Route::patch('vouchers/unblock/{id}', [Admin\VoucherController::class, 'unblock'])->name('admin.vouchers.unblock');
+        /*
+            Route::resource('users', Admin\UserController::class)
+                ->except(['show'])
+                ->names([
+                    'index' => 'admin.users.index',
+                    'create' => 'admin.users.create',
+                    'store' => 'admin.users.store',
+                    'edit' => 'admin.users.edit',
+                    'update' => 'admin.users.update',
+                    'destroy' => 'admin.users.destroy',
+                ]);
+            Route::patch('user/{id}/block', [Admin\UserController::class, 'blockUser'])
+                ->name('admin.users.block');
+            Route::patch('user/{id}/unblock', [Admin\UserController::class, 'unblockUser'])
+                ->name('admin.users.unblock');
+        */
+    });
 });
 
 // User function
