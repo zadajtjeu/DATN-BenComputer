@@ -8,9 +8,11 @@ use App\Enums\VoucherStatus;
 use App\Enums\VoucherCondition;
 use App\Enums\OrderStatus;
 use App\Enums\PaymentStatus;
+use App\Mail\CheckoutMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\Controller;
@@ -436,6 +438,9 @@ class CheckoutController extends Controller
 
                 return redirect($vnp_Url);
             } else {
+                // Send Mail
+                Mail::to(Auth::user()->email)->send(new CheckoutMail($order));
+
                 return view('users.checkoutsuccess', [
                     'order' => $order,
                 ]);
@@ -496,6 +501,9 @@ class CheckoutController extends Controller
         ) {
             //Update order payment status
             $this->orderRepo->updateOrderPaymentStatus($order->id, PaymentStatus::SUCCESS);
+
+            // Send Mail
+            Mail::to(Auth::user()->email)->send(new CheckoutMail($order));
 
             return view('users.checkoutsuccess', [
                 'order' => $order,
