@@ -7,6 +7,7 @@ use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\OrderController;
 use App\Http\Controllers\User\RatingController;
+use App\Http\Controllers\User\PostController;
 use App\Http\Controllers\Admin;
 
 /*
@@ -35,8 +36,15 @@ Route::get('products/{slug}.p{id}.html', [ProductController::class, 'getDetails'
     ->where(['id' => '[0-9]+'])
     ->name('products.details');
 
-Route::get('news/{slug}.html', [ProductController::class, 'brandDetails'])
+// Post
+Route::get('news', [PostController::class, 'index'])
+    ->name('posts.news');
+
+Route::get('news/{slug}.html', [PostController::class, 'viewPost'])
     ->name('posts.details');
+
+Route::get('news/{slug}/', [PostController::class, 'ViewPostType'])
+    ->name('posts.type');
 
 Route::get('brands/{slug}.html', [ProductController::class, 'brandDetails'])
     ->name('brands.details');

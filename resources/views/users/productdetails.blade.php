@@ -2,7 +2,7 @@
 
 @section('title') {{ $product_details->title }} @endsection
 @section('description') {{ Str::words(strip_tags($product_details->title), 20) }} @endsection
-@section('images') {{ isset($product_details->images[0]) ? $product_details->images[0] : asset('themes/images/logo.png') }} @endsection
+@section('images'){{ isset($product_details->images[0]) ? $product_details->images[0]->url : asset('themes/images/logo.png') }}@endsection
 
 @section('content')
 
@@ -33,7 +33,7 @@
 </div>
 <!-- Breadcrumb End -->
 <!-- Product Thumbnail Start -->
-<div class="main-product-thumbnail ptb-100 ptb-sm-60">
+<div class="main-product-thumbnail ptb-30 ptb-sm-60">
     <div class="container">
         <div class="thumb-bg">
             <div class="row">
