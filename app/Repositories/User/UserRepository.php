@@ -21,4 +21,11 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
         return false;
     }
+
+    public function getListByRole($role, $paginate)
+    {
+        return $this->model->where('role', $role)
+            ->orderBy('created_at', 'DESC')
+            ->paginate($paginate);
+    }
 }

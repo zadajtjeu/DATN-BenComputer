@@ -70,8 +70,30 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'adminAccess']], fun
     Route::get('orders/print/{id}', [Admin\OrderController::class, 'print'])
         ->name('admin.orders.print');
 
+    //User management manager
+    Route::get('users/list', [Admin\UserController::class, 'listUser'])
+        ->name('admin.users.list');
+    Route::patch('users/{id}/block', [Admin\UserController::class, 'blockUser'])
+        ->name('admin.users.block');
+    Route::patch('users/{id}/unblock', [Admin\UserController::class, 'unblockUser'])
+        ->name('admin.users.unblock');
+
     // Only for admin
     Route::middleware(['auth', 'isAdmin'])->group(function () {
+        //User management
+        Route::resource('users', Admin\UserController::class)
+            ->except(['show', 'create', 'store'])
+            ->names([
+                'index' => 'admin.users.index',
+                'edit' => 'admin.users.edit',
+                'update' => 'admin.users.update',
+                'destroy' => 'admin.users.destroy',
+            ]);
+        Route::patch('users/{id}/password', [Admin\UserController::class, 'resetPassword'])
+            ->name('admin.users.password');
+        Route::patch('users/{id}/role', [Admin\UserController::class, 'editRole'])
+            ->name('admin.users.role');
+
         Route::resource('categories', Admin\CategoryController::class)
             ->except(['show'])
             ->names([
@@ -114,22 +136,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'adminAccess']], fun
             ]);
         Route::patch('vouchers/block/{id}', [Admin\VoucherController::class, 'block'])->name('admin.vouchers.block');
         Route::patch('vouchers/unblock/{id}', [Admin\VoucherController::class, 'unblock'])->name('admin.vouchers.unblock');
-        /*
-            Route::resource('users', Admin\UserController::class)
-                ->except(['show'])
-                ->names([
-                    'index' => 'admin.users.index',
-                    'create' => 'admin.users.create',
-                    'store' => 'admin.users.store',
-                    'edit' => 'admin.users.edit',
-                    'update' => 'admin.users.update',
-                    'destroy' => 'admin.users.destroy',
-                ]);
-            Route::patch('user/{id}/block', [Admin\UserController::class, 'blockUser'])
-                ->name('admin.users.block');
-            Route::patch('user/{id}/unblock', [Admin\UserController::class, 'unblockUser'])
-                ->name('admin.users.unblock');
-        */
     });
 });
 
