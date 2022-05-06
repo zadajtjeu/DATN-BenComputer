@@ -107,4 +107,52 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
     {
         return $this->model->FullTextSearch($search)->take($paginate)->get();
     }
+
+    public function getProductWithFilter($filter)
+    {
+        $products = $this->model;
+
+        if (!empty($filter['categories_id'])) {
+            $products = $products->whereIn('category_id', $filter['categories_id']);
+        }
+
+        if (!empty($filter['brand'])) {
+            $products = $products->whereIn('brand_id', $filter['brand']);
+        }
+
+        if (!empty($filter['search'])) {
+            $products = $products->FullTextSearch($filter['search']);
+        }
+
+        if (isset($filter['minPrice']) && !empty($filter['maxPrice'])) {
+            $products = $products
+                ->whereBetween('price', [$filter['minPrice'], $filter['maxPrice']]);
+        }
+
+        // Sort
+        if ($filter['sort']) {
+            switch ($filter['sort']) {
+                case 'newest':
+                    $products = $products->orderBy('created_at', 'DESC');
+                    break;
+                case 'top_seller':
+                    $products = $products->orderBy('sold', 'DESC');
+                    break;
+                case 'price_asc':
+                    $products = $products->orderBy('price');
+                    break;
+                case 'price_desc':
+                    $products = $products->orderBy('price', 'DESC');
+                    break;
+                default:
+                    $products = $products->orderBy('created_at', 'DESC');
+                    break;
+            }
+        }
+
+        $products = $products->paginate($filter['paginate'])->withQueryString();
+
+
+        return $products;
+    }
 }

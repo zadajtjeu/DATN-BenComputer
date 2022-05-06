@@ -1035,6 +1035,15 @@
     "Add New Post" : "Thêm bài viết mới",
     "News" : "Tin tức",
     "Read More" : "Xem thêm",
+    "Empty" : "Rỗng",
+    "Filter By Price" : "Lọc theo giá",
+    "Filter" : "Lọc",
+    "Sort By" : "Sắp xếp theo",
+    "Show" : "Hiển thị",
+    "Popular" : "Phổ biến",
+    "Top Seller" : "Bán chạy",
+    "Low Price" : "Giá thấp",
+    "High Price" : "Giá cao",
     "" : "",
     "" : ""
 }

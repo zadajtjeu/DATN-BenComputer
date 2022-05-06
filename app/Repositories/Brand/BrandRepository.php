@@ -10,4 +10,10 @@ class BrandRepository extends BaseRepository implements BrandRepositoryInterface
     {
         return \App\Models\Brand::class;
     }
+
+    public function findBySlug($slug)
+    {
+        return $this->model
+            ->where('slug', $slug)->firstOrFail();
+    }
 }

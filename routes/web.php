@@ -46,10 +46,10 @@ Route::get('news/{slug}.html', [PostController::class, 'viewPost'])
 Route::get('news/{slug}/', [PostController::class, 'ViewPostType'])
     ->name('posts.type');
 
-Route::get('brands/{slug}.html', [ProductController::class, 'brandDetails'])
+Route::get('brands/{slug}', [ProductController::class, 'brandDetails'])
     ->name('brands.details');
 
-Route::get('categories/{slug}.html', [ProductController::class, 'categoryDetails'])
+Route::get('categories/{slug}', [ProductController::class, 'categoryDetails'])
     ->name('categories.details');
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'adminAccess']], function () {

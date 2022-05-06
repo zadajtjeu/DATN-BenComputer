@@ -5,15 +5,23 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\Product\ProductRepositoryInterface;
+use App\Repositories\Category\CategoryRepositoryInterface;
+use App\Repositories\Brand\BrandRepositoryInterface;
 
 class ProductController extends Controller
 {
     protected $productRepo;
+    protected $categoryRepo;
+    protected $brandRepo;
 
     public function __construct(
-        ProductRepositoryInterface $productRepo
+        ProductRepositoryInterface $productRepo,
+        CategoryRepositoryInterface $categoryRepo,
+        BrandRepositoryInterface $brandRepo
     ) {
         $this->productRepo = $productRepo;
+        $this->categoryRepo = $categoryRepo;
+        $this->brandRepo = $brandRepo;
     }
 
     public function getDetails($slug, $id)
@@ -39,14 +47,78 @@ class ProductController extends Controller
         ]);
     }
 
-    public function brandDetails($slug)
+    public function categoryDetails(Request $request, $slug)
     {
-        //
+        $paginate = config('pagination.per_page');
+        $sort = $request->sort;
+        $search = $request->search;
+        $brand = $request->brand;
+        $minPrice = $request->minPrice;
+        $maxPrice = $request->maxPrice;
+
+        // Number per page
+        if ($request->show && is_numeric($request->show)
+            && $request->show % 12 == 0
+        ) {
+            $paginate = $request->show;
+        }
+
+        $category = $this->categoryRepo->findBySlug($slug);
+
+        $list_categories_id = $this->categoryRepo
+            ->getChildrenCategoriesID($category->id);
+
+        $filter = [
+            'paginate' => $paginate,
+            'sort' => $sort,
+            'search' => $search,
+            'brand' => $brand,
+            'minPrice' => $minPrice,
+            'maxPrice' => $maxPrice,
+            'categories_id' => $list_categories_id,
+        ];
+
+        $products = $this->productRepo->getProductWithFilter($filter);
+
+        return view('users.products.category', [
+            'category' => $category,
+            'products' => $products,
+        ]);
     }
 
-    public function categoryDetails($slug)
+    public function brandDetails(Request $request, $slug)
     {
-        //
+        $paginate = config('pagination.per_page');
+        $sort = $request->sort;
+        $search = $request->search;
+        $brand = $request->brand;
+        $minPrice = $request->minPrice;
+        $maxPrice = $request->maxPrice;
+
+        // Number per page
+        if ($request->show && is_numeric($request->show)
+            && $request->show % 12 == 0
+        ) {
+            $paginate = $request->show;
+        }
+
+        $brand = $this->brandRepo->findBySlug($slug);
+
+        $filter = [
+            'paginate' => $paginate,
+            'sort' => $sort,
+            'search' => $search,
+            'brand' => [$brand->id],
+            'minPrice' => $minPrice,
+            'maxPrice' => $maxPrice,
+        ];
+
+        $products = $this->productRepo->getProductWithFilter($filter);
+
+        return view('users.products.brand', [
+            'brand' => $brand,
+            'products' => $products,
+        ]);
     }
 
     public function search(Request $request)
@@ -54,7 +126,9 @@ class ProductController extends Controller
         $search = $request->q;
 
         $paginate = config('pagination.per_page');
-        if ($request->show && is_int($request->show)) {
+        if ($request->show && is_numeric($request->show)
+            && $request->show % 12 == 0
+        ) {
             $paginate = $request->show;
         }
 
@@ -75,7 +149,9 @@ class ProductController extends Controller
         $search = $request->q;
 
         $paginate = config('pagination.per_page');
-        if ($request->show && is_int($request->show)) {
+        if ($request->show && is_numeric($request->show)
+            && $request->show % 12 == 0
+        ) {
             $paginate = $request->show;
         }
 

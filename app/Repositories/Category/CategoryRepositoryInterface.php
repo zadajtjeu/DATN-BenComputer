@@ -10,4 +10,6 @@ interface CategoryRepositoryInterface extends RepositoryInterface
     public function getChildrenCategoriesID($parent_id);
 
     public function updateChildrenNullWhenDetele($parent_id);
+
+    public function findBySlug($slug);
 }

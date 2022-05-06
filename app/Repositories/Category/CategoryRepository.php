@@ -45,4 +45,10 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
 
         return false;
     }
+
+    public function findBySlug($slug)
+    {
+        return $this->model->with('children')
+            ->where('slug', $slug)->firstOrFail();
+    }
 }

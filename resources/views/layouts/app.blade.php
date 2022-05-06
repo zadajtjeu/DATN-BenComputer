@@ -213,7 +213,7 @@
                                         <!-- Home Version Dropdown Start -->
                                         <ul class="ht-dropdown dropdown-style-two">
                                             @foreach($menu_categories as $category)
-                                                <li><a href="#">{{ $category->name }}</a></li>
+                                                <li><a href="{{ route('categories.details', $category->slug) }}">{{ $category->name }}</a></li>
                                             @endforeach
                                         </ul>
                                         <!-- Home Version Dropdown End -->
@@ -234,7 +234,7 @@
                                             <!-- Mobile Menu Dropdown Start -->
                                             <ul>
                                                 @foreach($menu_categories as $category)
-                                                    <li><a href="#">{{ $category->name }}</a></li>
+                                                    <li><a href="{{ route('categories.details', $category->slug) }}">{{ $category->name }}</a></li>
                                                 @endforeach
                                             </ul>
 
