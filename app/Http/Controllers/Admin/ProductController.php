@@ -96,7 +96,7 @@ class ProductController extends Controller
 
                     $file->storeAs('products', $new_name);
 
-                    $$this->productRepo->createImage($product->id, [
+                    $this->productRepo->createImage($product->id, [
                         'name' => $new_name,
                         'url' => Storage::url('products/' . $new_name),
                     ]);

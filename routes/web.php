@@ -35,6 +35,9 @@ Route::get('products/{slug}.p{id}.html', [ProductController::class, 'getDetails'
     ->where(['id' => '[0-9]+'])
     ->name('products.details');
 
+Route::get('news/{slug}.html', [ProductController::class, 'brandDetails'])
+    ->name('posts.details');
+
 Route::get('brands/{slug}.html', [ProductController::class, 'brandDetails'])
     ->name('brands.details');
 
@@ -77,6 +80,18 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'adminAccess']], fun
         ->name('admin.users.block');
     Route::patch('users/{id}/unblock', [Admin\UserController::class, 'unblockUser'])
         ->name('admin.users.unblock');
+
+    // Post management
+    Route::resource('posts', Admin\PostController::class)
+    ->except(['show'])
+    ->names([
+        'index' => 'admin.posts.index',
+        'create' => 'admin.posts.create',
+        'store' => 'admin.posts.store',
+        'edit' => 'admin.posts.edit',
+        'update' => 'admin.posts.update',
+        'destroy' => 'admin.posts.destroy',
+    ]);
 
     // Only for admin
     Route::middleware(['auth', 'isAdmin'])->group(function () {

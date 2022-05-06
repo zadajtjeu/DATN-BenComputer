@@ -10,4 +10,24 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
     {
         return \App\Models\Post::class;
     }
+
+    public function createThumbnail($post_id, $image_info)
+    {
+        $thumbnail = $this->findOrFail($post_id);
+
+        $thumbnail->thumbnail()->create([
+            'name' => $image_info['name'],
+            'url' => $image_info['url'],
+        ]);
+    }
+
+    public function updateThumbnail($post_id, $image_info)
+    {
+        $thumbnail = $this->findOrFail($post_id);
+
+        $thumbnail->thumbnail()->update([
+            'name' => $image_info['name'],
+            'url' => $image_info['url'],
+        ]);
+    }
 }
