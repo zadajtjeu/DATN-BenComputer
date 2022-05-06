@@ -6,4 +6,6 @@ use App\Repositories\RepositoryInterface;
 interface UserRepositoryInterface extends RepositoryInterface
 {
     public function checkAuthVoucherUsed($voucher_id);
+
+    public function getListByRole($role, $paginate);
 }

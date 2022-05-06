@@ -1021,6 +1021,13 @@
     "Edit Voucher" : "Cập nhập mã giảm giá",
     "Showing :from to :to of :total (:page Pages)" : "Hiển thị:from đến:to của :total (:page trang)",
     "Nothing found." : "Không tìm thấy.",
+    "Edit User" : "Chỉnh sửa thông tin người dùng",
+    "Edit Role" : "Sửa quyền",
+    "Admin" : "Quản trị viên",
+    "Manager" : "Quản lý",
+    "Comfirm Block" : "Xác nhận khóa",
+    "Comfirm UnBlock" : "Xác nhận bỏ khóa",
+    "UnBlock" : "Mở khóa",
     "" : "",
     "" : ""
 }

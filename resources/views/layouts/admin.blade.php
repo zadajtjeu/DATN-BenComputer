@@ -130,12 +130,14 @@
                                         <p>{{ __('Add New') }}</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('admin.posttypes.index') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>{{ __('Post Types') }}</p>
-                                    </a>
-                                </li>
+                                @if (isAdmin())
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.posttypes.index') }}" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>{{ __('Post Types') }}</p>
+                                        </a>
+                                    </li>
+                                @endif
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -221,26 +223,18 @@
                             <ul class="nav nav-treeview">
                                 @if (isAdmin())
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                        <a href="{{ route('admin.users.index') }}" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>{{ __('All Accounts') }}</p>
                                         </a>
                                     </li>
                                 @endif
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="{{ route('admin.users.list') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>{{ __('Client Accounts') }}</p>
                                     </a>
                                 </li>
-                                @if (isAdmin())
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>{{ __('Admin Accounts') }}</p>
-                                        </a>
-                                    </li>
-                                @endif
                             </ul>
                         </li>
                         @if (isAdmin())
