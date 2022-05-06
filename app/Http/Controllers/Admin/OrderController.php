@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use DB;
 use Exception;
+
+use App\Mail\OrderStatusMail;
 use App\Enums\OrderStatus;
 use App\Enums\PaymentStatus;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use App\Repositories\Product\ProductRepositoryInterface;
 use App\Repositories\Order\OrderRepositoryInterface;
 use App\Repositories\Voucher\VoucherRepositoryInterface;
@@ -126,6 +129,9 @@ class OrderController extends Controller
 
             $this->orderRepo->forceUpdate($order->id, $order_update);
 
+            //Send mail to user
+            Mail::send(new OrderStatusMail($order));
+
             DB::commit();
         } catch (Exception $e) {
             DB::rollBack();
@@ -172,6 +178,9 @@ class OrderController extends Controller
 
         try {
             $this->orderRepo->forceUpdate($order->id, $order_update);
+
+            //Send mail to user
+            Mail::send(new OrderStatusMail($order));
         } catch (Exception $e) {
             return redirect()->back()
                 ->with('error', __('There are some errors. Please try again later!'));

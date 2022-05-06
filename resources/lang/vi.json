@@ -1044,6 +1044,14 @@
     "Top Seller" : "Bán chạy",
     "Low Price" : "Giá thấp",
     "High Price" : "Giá cao",
+    "Your order #:code" : "Đơn hàng của bạn #:code",
+    "Order #:code recently added" : "Đơn hàng #:code đã đặt thành công. Vui lòng kiểm tra lại!",
+    "Order #:code has been approved" : "Đơn hàng #:code đã được chấp nhận giao. Vui lòng kiểm tra lại!",
+    "Order #:code in transit" : "Đơn hàng #:code đang trên đường vận chuyển đến bạn. Vui lòng kiểm tra lại!",
+    "Order #:code is completed" : "Đơn hàng #:code đã được đánh dấu hoàn thành. Vui lòng kiểm tra lại!",
+    "Order #:code is canceled" : "Đơn hàng #:code bị từ chối. Vui lòng kiểm tra lại!",
+    "Click here to view your order" : "Bấm vào đây để xem đơn đặt hàng của bạn",
+    "Order Status Update" : "Thông tin đơn hàng",
     "" : "",
     "" : ""
 }
