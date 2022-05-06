@@ -96,4 +96,15 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
 
         return false;
     }
+
+    public function searchProduct($search, $paginate)
+    {
+        return $this->model->FullTextSearch($search)
+            ->paginate($paginate)->withQueryString();
+    }
+
+    public function searchProductAjax($search, $paginate)
+    {
+        return $this->model->FullTextSearch($search)->take($paginate)->get();
+    }
 }

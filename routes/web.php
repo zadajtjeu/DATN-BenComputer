@@ -27,6 +27,10 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('language/{language}', [HomeController::class, 'changeLanguage'])->name('language');
 
+Route::get('search', [ProductController::class, 'search'])->name('search');
+
+Route::get('searchajax', [ProductController::class, 'searchAjax'])->name('search.ajax');
+
 Route::get('products/{slug}.p{id}.html', [ProductController::class, 'getDetails'])
     ->where(['id' => '[0-9]+'])
     ->name('products.details');

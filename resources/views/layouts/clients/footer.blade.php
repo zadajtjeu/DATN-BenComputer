@@ -301,3 +301,41 @@
         </script>
     @endif
     @yield('addjs')
+    <script src="{{ asset('templates/typeahead.js/dist/typeahead.bundle.min.js') }}"></script>
+    <script>
+        $(document).ready(function($) {
+            var engine1 = new Bloodhound({
+                remote: {
+                    url: '/searchajax?q=%QUERY%',
+                    wildcard: '%QUERY%'
+                },
+                datumTokenizer: Bloodhound.tokenizers.whitespace('q'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace
+            });
+
+            $("#search-key").typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 1
+            }, [
+                {
+                    source: engine1.ttAdapter(),
+                    name: 'title',
+                    display: function(data) {
+                        return data.name;
+                    },
+                    templates: {
+                        empty: [
+                            '<div class="list-group search-results-dropdown"><div class="list-group-item">{{ __('Nothing found.') }}</div></div>'
+                        ],
+                        header: [
+                            '<div class="list-group search-results-dropdown"></div>'
+                        ],
+                        suggestion: function (data) {
+                            return '<a href="/products/' + data.slug + '.p' + data.id + '.html" class="list-group-item">' + data.title + '</a>';
+                        }
+                    }
+                }
+            ]);
+        });
+    </script>

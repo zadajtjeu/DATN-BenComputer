@@ -48,4 +48,44 @@ class ProductController extends Controller
     {
         //
     }
+
+    public function search(Request $request)
+    {
+        $search = $request->q;
+
+        $paginate = config('pagination.per_page');
+        if ($request->show && is_int($request->show)) {
+            $paginate = $request->show;
+        }
+
+        if ($search) {
+            $list_products = $this->productRepo
+                ->searchProduct($search, $paginate);
+        } else {
+            return redirect()->back();
+        }
+
+        return view('users.search', [
+            'list_products' => $list_products,
+        ]);
+    }
+
+    public function searchAjax(Request $request)
+    {
+        $search = $request->q;
+
+        $paginate = config('pagination.per_page');
+        if ($request->show && is_int($request->show)) {
+            $paginate = $request->show;
+        }
+
+        if ($search) {
+            $list_products = $this->productRepo
+                ->searchProductAjax($search, $paginate);
+        } else {
+            return redirect()->back();
+        }
+
+        return response()->json($list_products);
+    }
 }

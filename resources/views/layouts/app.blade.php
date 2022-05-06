@@ -109,9 +109,8 @@
                         <!-- Categorie Search Box Start Here -->
                         <div class="col-lg-5 col-md-8 ml-auto mr-auto col-10">
                             <div class="categorie-search-box">
-                                <form role="search" method="post" id="searchform" action="#" onsubmit="return validate()" autocomplete="off">
-                                    @csrf
-                                    <input id="key" type="text" name="search" placeholder="{{ __('Search')}}" >
+                                <form class="typeahead" role="search" method="get" id="searchform" action="{{ route('search') }}">
+                                    <input type="search" id="search-key" type="text" name="q" placeholder="{{ __('Search')}}" value="{{ request()->query('q') }}" autocomplete="off">
                                     <div id="search_ajax"></div>
                                     <button type="submit"><i class="lnr lnr-magnifier"></i></button>
                                 </form>
