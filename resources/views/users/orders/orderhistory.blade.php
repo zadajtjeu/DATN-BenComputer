@@ -21,10 +21,7 @@
 <div class="cart-main-area ptb-20 ptb-sm-60">
     <div class="container">
         <div class="row">
-            <div class="col-md-4 col-sm-12">
-                @include('layouts.clients.sidebar')
-            </div>
-            <div class="col-md-8 col-sm-12">
+            <div class="col-md-12 col-sm-12">
                 <div class="card">
                     <div class="card-header p-3">{{ __('Order History') }}</div>
                     <div class="card-body p-0">

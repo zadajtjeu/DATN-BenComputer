@@ -296,4 +296,29 @@
         <!-- Container End -->
     </div>
     <!-- Arrivals Products Area End Here -->
+
+    <!-- Brand Banner Area Start Here -->
+    <div class="main-brand-banner pt-95 pb-100 pt-sm-55 pb-sm-60">
+        <div class="container">
+            <div class="section-ttitle mb-20">
+                <h2>{{ __('Brands') }}</h2>
+           </div>
+            <div class="row no-gutters justify-content-center">
+                <div class="col-lg-9">
+                    <!-- Brand Banner Start -->
+                    <div class="brand-banner owl-carousel">
+                        @foreach ($brands as $brand)
+                            <div class="single-brand">
+                                <a href="{{ route('brands.details', $brand->slug) }}"><img class="img" src="{{ isset($brand->logo) ? $brand->logo->url : 'https://i.ibb.co/TgF9hCQ/image.png' }}" alt="{{ $brand->name }}"></a>
+                            </div>
+                        @endforeach
+                    </div>
+                    <!-- Brand Banner End -->
+
+                </div>
+            </div>
+        </div>
+        <!-- Container End -->
+    </div>
+    <!-- Brand Banner Area End Here -->
 @endsection
