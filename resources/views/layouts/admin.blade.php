@@ -119,13 +119,13 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="{{ route('admin.posts.index') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>{{ __('All Posts') }}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="{{ route('admin.posts.create') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>{{ __('Add New') }}</p>
                                     </a>
