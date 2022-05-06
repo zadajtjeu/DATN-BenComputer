@@ -1019,7 +1019,8 @@
     "Decrease By Percentage" : "Giảm theo phần trăm",
     "Decrease By Amount" : "Giảm theo số tiền",
     "Edit Voucher" : "Cập nhập mã giảm giá",
-    "" : "",
+    "Showing :from to :to of :total (:page Pages)" : "Hiển thị:from đến:to của :total (:page trang)",
+    "Nothing found." : "Không tìm thấy.",
     "" : "",
     "" : ""
 }
