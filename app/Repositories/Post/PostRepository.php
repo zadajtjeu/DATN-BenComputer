@@ -30,4 +30,19 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
             'url' => $image_info['url'],
         ]);
     }
+
+    public function getAllPostsPaginate($list_post_type_id, $paginate)
+    {
+        return $this->model
+            ->whereIn('post_type_id', $list_post_type_id)
+            ->paginate($paginate);
+    }
+
+    public function findBySlug($slug)
+    {
+        return $this->model
+            ->where('slug', $slug)
+            ->with('postType.parent')
+            ->firstOrFail();
+    }
 }

@@ -10,4 +10,6 @@ interface PostTypeRepositoryInterface extends RepositoryInterface
     public function getChildrenPostTypesID($parent_id);
 
     public function updateChildrenNullWhenDetele($parent_id);
+
+    public function getPostTypeWithParent($slug);
 }

@@ -218,6 +218,7 @@
                                         </ul>
                                         <!-- Home Version Dropdown End -->
                                     </li>
+                                    <li {{ url()->current() == route('posts.news') ? 'class="active"' : '' }}><a href="{{ route('posts.news')}} ">{{ __('News') }}</a></li>
                                     <li {{ url()->current() == route('home') ? 'class="active"' : '' }}><a href="#">{{ __('About') }}</a></li>
                                     <li {{ url()->current() == route('home') ? 'class="active"' : '' }}><a href="#">{{ __('Contact') }}</a></li>
                                 </ul>
@@ -241,6 +242,7 @@
                                         </li>
 
 
+                                        <li><a href="{{ route('posts.news') }}">{{ __('News') }}</a></li>
                                         <li><a href="{{ route('home') }}">{{ __('About') }}</a></li>
                                         <li><a href="{{ route('home')}}">{{ __('Contact') }}</a></li>
                                     </ul>

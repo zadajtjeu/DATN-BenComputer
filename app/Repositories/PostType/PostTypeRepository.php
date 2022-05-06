@@ -45,4 +45,10 @@ class PostTypeRepository extends BaseRepository implements PostTypeRepositoryInt
 
         return false;
     }
+
+    public function getPostTypeWithParent($slug)
+    {
+        return $this->model->with('parent')
+            ->where('slug', $slug)->firstOrFail();
+    }
 }
