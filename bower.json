@@ -30,5 +30,8 @@
     "bootstrap": "4.0.0",
     "adminlte": "^3.2.0",
     "datatables.net-plugins": "datatables-plugins#^1.11.5"
+  },
+  "resolutions": {
+    "jquery": "~3.6.0"
   }
 }
