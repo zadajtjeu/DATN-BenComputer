@@ -29,6 +29,12 @@
     "jquery.meanmenu": "*",
     "bootstrap": "4.0.0",
     "adminlte": "^3.2.0",
-    "datatables.net-plugins": "datatables-plugins#^1.11.5"
+    "datatables.net-plugins": "datatables-plugins#^1.11.5",
+    "ckeditor": "^4.18.0",
+    "datatables": "^1.10.21",
+    "typeahead.js": "^0.11.1"
+  },
+  "resolutions": {
+    "jquery": "~3.6.0"
   }
 }
