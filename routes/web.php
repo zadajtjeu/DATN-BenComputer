@@ -101,6 +101,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'adminAccess']], fun
         'destroy' => 'admin.posts.destroy',
     ]);
 
+    Route::post('select-month-order', [Admin\AdminController::class, 'selectMonthOrder'])
+        ->name('admin.statistic.selectMonthOrder');
+    Route::post('select-year-revenue', [Admin\AdminController::class, 'selectYearRevenue'])
+        ->name('admin.statistic.selectYearRevenue');
+
     // Only for admin
     Route::middleware(['auth', 'isAdmin'])->group(function () {
         //User management

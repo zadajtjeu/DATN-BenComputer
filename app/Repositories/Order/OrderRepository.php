@@ -1,6 +1,7 @@
 <?php
 namespace App\Repositories\Order;
 
+use DB;
 use App\Repositories\BaseRepository;
 use App\Enums\OrderStatus;
 use Illuminate\Support\Facades\Auth;
@@ -49,5 +50,21 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
         return $this->model->where('status', $status)
             ->orderBy('created_at', 'DESC')
             ->paginate($paginate);
+    }
+
+    public function getRevenueMonth($year)
+    {
+        return $this->model->where('status', OrderStatus::COMPLETED)->whereYear('created_at', $year)
+            ->selectRaw('month(created_at) as m, year(created_at) as y,sum(promotion_price) as sum')
+            ->groupBy(DB::raw('month(created_at),year(created_at)'))
+            ->pluck('sum', 'm')->toArray();
+    }
+
+    public function getTotalOrdersWeekForMonth($monday, $nextMonday)
+    {
+        return $this->model->where('status', OrderStatus::COMPLETED)->whereBetween('created_at', [$monday, $nextMonday])
+            ->selectRaw('year(created_at) as y,count(id) as countId')
+            ->groupBy(DB::raw('year(created_at)'))
+            ->pluck('countId');
     }
 }
