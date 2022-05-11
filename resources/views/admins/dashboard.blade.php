@@ -74,165 +74,92 @@
 
 <div class="row">
 
-    <section class="col-lg-7 connectedSortable">
+    <section class="col-lg-6 connectedSortable">
 
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">
                     <i class="fas fa-chart-pie mr-1"></i>
-                    Sales
+                    {{ __('Statistic order') }}
                 </h3>
                 <div class="card-tools">
-                    <ul class="nav nav-pills ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#revenue-chart" data-toggle="tab">Area</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#sales-chart" data-toggle="tab">Donut</a>
-                        </li>
-                    </ul>
+                    <form method="post" class="row">
+                        @csrf
+                        <div class="col-auto">
+                            <select name="month" id="select_month"
+                                class="select-filter-order form-control">
+                                <option>-- {{ __('Month') }} --</option>
+                                <option value="1">{{ __('January') }}</option>
+                                <option value="2">{{ __('February') }} </option>
+                                <option value="3">{{ __('March') }}</option>
+                                <option value="4">{{ __('April') }}</option>
+                                <option selected value="5">{{ __('May') }}</option>
+                                <option value="6">{{ __('June') }}</option>
+                                <option value="7">{{ __('July') }}</option>
+                                <option value="8">{{ __('August') }}</option>
+                                <option value="9">{{ __('September') }}</option>
+                                <option value="10">{{ __('October') }} </option>
+                                <option value="11">{{ __('November') }} </option>
+                                <option value="12">{{ __('December') }} </option>
+                            </select>
+                        </div>
+                        <div class="col-auto">
+                            <select name="year" id="select_year"
+                                class="select-filter-order form-control">
+                                <option>-- {{ __('Year') }} --</option>
+                                <option value="2020">2020</option>
+                                <option value="2021">2021</option>
+                                <option selected value="2022">2022</option>
+                            </select>
+                        </div>
+                        <div class="col-auto">
+                            <input type="button" id="btn-date-filter-order"
+                            class="btn btn-primary btn-sm"
+                            value="{{ __('Search') }}"
+                            data-url="{{ route('admin.statistic.selectMonthOrder') }}">
+                        </div>
+                    </form>
                 </div>
             </div>
-            <div class="card-body">
-                <div class="tab-content p-0">
-
-                    <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;">
-                        <canvas id="revenue-chart-canvas" height="300" style="height: 300px;"></canvas>
-                    </div>
-                    <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;">
-                        <canvas id="sales-chart-canvas" height="300" style="height: 300px;"></canvas>
-                    </div>
-                </div>
+            <div class="card-body" id="graph-container">
+                <canvas id="line-chart"></canvas>
             </div>
         </div>
 
     </section>
 
 
-    <section class="col-lg-5 connectedSortable">
+    <section class="col-lg-6 connectedSortable">
 
-        <div class="card bg-gradient-primary">
-            <div class="card-header border-0">
-                <h3 class="card-title">
-                    <i class="fas fa-map-marker-alt mr-1"></i>
-                    Visitors
-                </h3>
-
-                <div class="card-tools">
-                    <button type="button" class="btn btn-primary btn-sm daterange" title="Date range">
-                        <i class="far fa-calendar-alt"></i>
-                    </button>
-                    <button type="button" class="btn btn-primary btn-sm" data-card-widget="collapse" title="Collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                </div>
-
-            </div>
-            <div class="card-body">
-                <div id="world-map" style="height: 250px; width: 100%;"></div>
-            </div>
-
-            <div class="card-footer bg-transparent">
-                <div class="row">
-                    <div class="col-4 text-center">
-                        <div id="sparkline-1"></div>
-                        <div class="text-white">Visitors</div>
-                    </div>
-
-                    <div class="col-4 text-center">
-                        <div id="sparkline-2"></div>
-                        <div class="text-white">Online</div>
-                    </div>
-
-                    <div class="col-4 text-center">
-                        <div id="sparkline-3"></div>
-                        <div class="text-white">Sales</div>
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-
-
-        <div class="card bg-gradient-info">
+        <div class="card">
             <div class="card-header border-0">
                 <h3 class="card-title">
                     <i class="fas fa-th mr-1"></i>
-                    Sales Graph
-                </h3>
-                <div class="card-tools">
-                    <button type="button" class="btn bg-info btn-sm" data-card-widget="collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn bg-info btn-sm" data-card-widget="remove">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="card-body">
-                <canvas class="chart" id="line-chart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-            </div>
-
-            <div class="card-footer bg-transparent">
-                <div class="row">
-                    <div class="col-4 text-center">
-                        <input type="text" class="knob" data-readonly="true" value="20" data-width="60" data-height="60" data-fgColor="#39CCCC">
-                        <div class="text-white">Mail-Orders</div>
-                    </div>
-
-                    <div class="col-4 text-center">
-                        <input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60" data-fgColor="#39CCCC">
-                        <div class="text-white">Online</div>
-                    </div>
-
-                    <div class="col-4 text-center">
-                        <input type="text" class="knob" data-readonly="true" value="30" data-width="60" data-height="60" data-fgColor="#39CCCC">
-                        <div class="text-white">In-Store</div>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="card bg-gradient-success">
-            <div class="card-header border-0">
-                <h3 class="card-title">
-                    <i class="far fa-calendar-alt"></i>
-                    Calendar
+                    {{ __('Statistic revenue') }}
                 </h3>
 
                 <div class="card-tools">
-
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown" data-offset="-52">
-                            <i class="fas fa-bars"></i>
-                        </button>
-                        <div class="dropdown-menu" role="menu">
-                            <a href="#" class="dropdown-item">Add new event</a>
-                            <a href="#" class="dropdown-item">Clear events</a>
-                            <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item">View calendar</a>
+                    <form method="post row">
+                        @csrf
+                        <div class="col-auto">
+                            <select class="form-control"
+                                id="select-filter-revenue"
+                                data-url="{{ route('admin.statistic.selectYearRevenue') }}">
+                                <option>-- {{ __('titles.select_year') }} --
+                                </option>
+                                <option value="2020">
+                                    2020</option>
+                                <option value="2021">2021</option>
+                                <option selected value="2022">2022</option>
+                            </select>
                         </div>
-                    </div>
-                    <button type="button" class="btn btn-success btn-sm" data-card-widget="collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-success btn-sm" data-card-widget="remove">
-                        <i class="fas fa-times"></i>
-                    </button>
+                    </form>
                 </div>
 
             </div>
-
-            <div class="card-body pt-0">
-
-                <div id="calendar" style="width: 100%"></div>
+            <div class="card-body" id="graph-container2">
+                <canvas id="chart_revenue"></canvas>
             </div>
-
         </div>
 
     </section>
@@ -242,5 +169,158 @@
 @endsection
 
 @section('addjs')
-    <script src="{{ asset('templates/adminlte/dist/js/pages/dashboard.js') }}"></script>
+    <script>
+        $(function () {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            // loadRevenue();
+            if($('#btn-date-filter-order')){
+                loadOrder();
+            }
+
+            if($('#select-filter-revenue')){
+                loadRevenue();
+            }
+
+            function loadCanvas(total_order){
+                $('#line-chart').remove();
+                $('#graph-container').append('<canvas id="line-chart"><canvas>');
+                var barChart = $('#line-chart');
+                var myChart = new Chart(barChart, {
+                    type: 'bar',
+                    data: {
+                        labels: ['{{ __('Week') }} 1','{{ __('Week') }} 2','{{ __('Week') }} 3','{{ __('Week') }} 4'],
+                        datasets: [{
+                                label: '{{ __('Total orders') }}',
+                                data: total_order.split(','),
+                                backgroundColor: 'rgba(0, 128, 128, 0.7)',
+                                borderColor: 'rgba(0, 128, 128, 0.7)',
+                                borderWidth: 1
+                            },
+                        ]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    precision: 0
+                                }
+                            }]
+                        },
+                    }
+                });
+            }
+
+            function loadOrder(){
+                var month = $('#select_month').val();
+                var year = $('#select_year').val();
+                var url = $('#btn-date-filter-order').data('url');
+                $.ajax({
+                    url: url,
+                    method: 'post',
+                    data: {
+                        month: month,
+                        year: year,
+                    },
+                    success: function(data) {
+                        loadCanvas(data);
+                    },
+                    error: function (error) {
+                       toastr.error(error);
+                    },
+                });
+            }
+
+            $('#btn-date-filter-order').click(function() {
+                var month = $('#select_month').val();
+                var year = $('#select_year').val();
+                var url = $(this).data('url');
+                $.ajax({
+                    url: url,
+                    method: 'post',
+                    data: {
+                        month: month,
+                        year: year,
+                    },
+                    success: function(data) {
+                        loadCanvas(data);
+                    },
+                    error: function (error) {
+                        toastr.error(error);
+                    },
+                });
+            });
+
+            function loadCanvasRevenue(month,revenue){
+                $('#chart_revenue').remove();
+                $('#graph-container2').append('<canvas id="chart_revenue"><canvas>');
+                var lineChart = $('#chart_revenue');
+                var myChartt = new Chart(lineChart, {
+                    type: 'line',
+                    data: {
+                        labels: month.split(','),
+                        datasets: [{
+                                label: '{{ __('Revenue') }}',
+                                data: revenue.split(','),
+                                fill: false,
+                                borderColor: 'rgb(75, 192, 192)',
+                                tension: 0.1
+                            }
+                        ]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        },
+                    }
+                });
+            }
+
+            function loadRevenue(){
+                var year = $('#select-filter-revenue').val();
+                var url = $('#select-filter-revenue').data('url');
+                $.ajax({
+                    url: url,
+                    method: "post",
+                    data: {
+                        year1: year,
+                    },
+                    success: function(data) {
+                        loadCanvasRevenue(data['month'],data['revenue']);
+                    },
+                    error: function (error) {
+                        toastr.error(error);
+                    },
+                });
+            }
+
+            $('#select-filter-revenue').change(function() {
+                var year = $(this).val();
+                var url = $(this).data('url');
+                $.ajax({
+                    url: url,
+                    method: "post",
+                    data: {
+                        year1: year,
+                    },
+                    success: function(data) {
+                        loadCanvasRevenue(data['month'],data['revenue']);
+                    },
+                    error: function (error) {
+                        toastr.error(error);
+                    },
+                });
+
+            });
+        });
+    </script>
 @endsection

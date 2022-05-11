@@ -12,4 +12,8 @@ interface OrderRepositoryInterface extends RepositoryInterface
     public function getFullAuthOrderDetails($id);
 
     public function getOrderByStatusPaginate($status, $paginate);
+
+    public function getTotalOrdersWeekForMonth($monday, $nextMonday);
+
+    public function getRevenueMonth($year);
 }
