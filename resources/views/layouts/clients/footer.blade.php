@@ -100,68 +100,29 @@
                 <div class="container">
                     <div class="row">
                         <!-- Single Footer Start -->
-                        <div class="col-lg-2 col-md-4 col-sm-6">
+                        <div class="col-lg-4 col-md-4 col-sm-6">
                             <div class="single-footer mb-sm-40">
                                 <h3 class="footer-title">{{ __('Information') }}</h3>
                                 <div class="footer-content">
                                     <ul class="footer-list">
-                                        <li><a href="about.html">{{ __('About Us') }}</a></li>
+                                        <li><a href="{{ route('about') }}">{{ __('About Us') }}</a></li>
                                         <li><a href="#">{{ __('Delivery Information') }}</a></li>
-                                        <li><a href="#">{{ __('Privacy Policy') }}</a></li>
-                                        <li><a href="contact.html">{{ __('Terms & Conditions') }}</a></li>
-                                        <li><a href="login.html">{{ __('FAQs') }}</a></li>
-                                        <li><a href="login.html">{{ __('Return Policy') }}</a></li>
+                                        <li><a href="{{ route('privacy') }}">{{ __('Privacy Policy') }}</a></li>
+                                        <li><a href="{{ route('faq') }}">{{ __('FAQs') }}</a></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <!-- Single Footer Start -->
                         <!-- Single Footer Start -->
-                        <div class="col-lg-2 col-md-4 col-sm-6">
-                            <div class="single-footer mb-sm-40">
-                                <h3 class="footer-title">{{ __('Customer Service') }}</h3>
-                                <div class="footer-content">
-                                    <ul class="footer-list">
-                                        <li><a href="contact.html">{{ __('Contact Us') }}</a></li>
-                                        <li><a href="#">{{ __('Returns') }}</a></li>
-                                        <li><a href="{{ route('user.orderhistory') }}">{{ __('Order History') }}</a></li>
-                                        <li><a href="wishlist.html">{{ __('Wish List') }}</a></li>
-                                        <li><a href="#">{{ __('Site Map') }}</a></li>
-                                        <li><a href="#">{{ __('Gift Certificates') }}</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Single Footer Start -->
-                        <!-- Single Footer Start -->
-                        <div class="col-lg-2 col-md-4 col-sm-6">
-                            <div class="single-footer mb-sm-40">
-                                <h3 class="footer-title">{{ __('Extras') }}</h3>
-                                <div class="footer-content">
-                                    <ul class="footer-list">
-                                        <li><a href="#">{{ __('Newsletter') }}</a></li>
-                                        <li><a href="#">{{ __('Brands') }}</a></li>
-                                        <li><a href="#">{{ __('Gift Certificates') }}</a></li>
-                                        <li><a href="#">{{ __('Affiliate') }}</a></li>
-                                        <li><a href="#">{{ __('Specials') }}</a></li>
-                                        <li><a href="#">{{ __('Site Map') }}</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Single Footer Start -->
-                        <!-- Single Footer Start -->
-                        <div class="col-lg-2 col-md-4 col-sm-6">
+                        <div class="col-lg-4 col-md-4 col-sm-6">
                             <div class="single-footer mb-sm-40">
                                 <h3 class="footer-title">{{ __('My Account') }}</h3>
                                 <div class="footer-content">
                                     <ul class="footer-list">
-                                        <li><a href="contact.html">{{ __('Contact Us') }}</a></li>
-                                        <li><a href="#">{{ __('Returns') }}</a></li>
-                                        <li><a href="#">{{ __('My Account') }}</a></li>
-                                        <li><a href="#">{{ __('Order History') }}</a></li>
-                                        <li><a href="wishlist.html">{{ __('Wish List') }}</a></li>
-                                        <li><a href="#">{{ __('Newsletter') }}</a></li>
+                                        <li><a href="{{ route('contact') }}">{{ __('Contact Us') }}</a></li>
+                                        <li><a href="{{ route('profile') }}">{{ __('My Account') }}</a></li>
+                                        <li><a href="{{ route('user.orderhistory') }}">{{ __('Order History') }}</a></li>
                                     </ul>
                                 </div>
                             </div>

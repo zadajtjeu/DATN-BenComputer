@@ -74,7 +74,7 @@
                             <!-- Dropdown End -->
                             @auth
                                 <li>
-                                    <a href="#"><i class="fa fa-id-card-o" aria-hidden="true"></i> {{ __('Hi') }},
+                                    <a href="{{ route('profile') }}"><i class="fa fa-id-card-o" aria-hidden="true"></i> {{ __('Hi') }},
                                         {{ Auth::user()->name }}
                                     </a>
                                 </li>
@@ -219,8 +219,8 @@
                                         <!-- Home Version Dropdown End -->
                                     </li>
                                     <li {{ url()->current() == route('posts.news') ? 'class="active"' : '' }}><a href="{{ route('posts.news')}} ">{{ __('News') }}</a></li>
-                                    <li {{ url()->current() == route('home') ? 'class="active"' : '' }}><a href="#">{{ __('About') }}</a></li>
-                                    <li {{ url()->current() == route('home') ? 'class="active"' : '' }}><a href="#">{{ __('Contact') }}</a></li>
+                                    <li {{ url()->current() == route('about') ? 'class="active"' : '' }}><a href="{{ route('about') }}">{{ __('About') }}</a></li>
+                                    <li {{ url()->current() == route('contact') ? 'class="active"' : '' }}><a href="{{ route('contact') }}">{{ __('Contact') }}</a></li>
                                 </ul>
                             </nav>
                             <div class="mobile-menu d-block d-lg-none">
@@ -243,8 +243,8 @@
 
 
                                         <li><a href="{{ route('posts.news') }}">{{ __('News') }}</a></li>
-                                        <li><a href="{{ route('home') }}">{{ __('About') }}</a></li>
-                                        <li><a href="{{ route('home')}}">{{ __('Contact') }}</a></li>
+                                        <li><a href="{{ route('about') }}">{{ __('About') }}</a></li>
+                                        <li><a href="{{ route('contact')}}">{{ __('Contact') }}</a></li>
                                     </ul>
                                 </nav>
                             </div>
