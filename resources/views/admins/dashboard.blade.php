@@ -88,7 +88,7 @@
                         <div class="col-auto">
                             <select name="month" id="select_month"
                                 class="select-filter-order form-control">
-                                <option>-- {{ __('Month') }} --</option>
+                                <option disabled>-- {{ __('Month') }} --</option>
                                 <option value="1">{{ __('January') }}</option>
                                 <option value="2">{{ __('February') }} </option>
                                 <option value="3">{{ __('March') }}</option>
@@ -106,7 +106,7 @@
                         <div class="col-auto">
                             <select name="year" id="select_year"
                                 class="select-filter-order form-control">
-                                <option>-- {{ __('Year') }} --</option>
+                                <option disabled>-- {{ __('Year') }} --</option>
                                 <option value="2020">2020</option>
                                 <option value="2021">2021</option>
                                 <option selected value="2022">2022</option>
@@ -145,7 +145,7 @@
                             <select class="form-control"
                                 id="select-filter-revenue"
                                 data-url="{{ route('admin.statistic.selectYearRevenue') }}">
-                                <option>-- {{ __('titles.select_year') }} --
+                                <option disabled>-- {{ __('Year') }} --
                                 </option>
                                 <option value="2020">
                                     2020</option>

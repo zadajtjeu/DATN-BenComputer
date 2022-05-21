@@ -8,6 +8,7 @@ use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\OrderController;
 use App\Http\Controllers\User\RatingController;
 use App\Http\Controllers\User\PostController;
+use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\Admin;
 
 /*
@@ -23,8 +24,28 @@ use App\Http\Controllers\Admin;
 
 Auth::routes(['verify' => true]);
 
-
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// Page
+Route::get('about', function () {
+    return view('pages.about');
+})->name('about');
+
+Route::get('contact', function () {
+    return view('pages.contact');
+})->name('contact');
+
+Route::get('privacy', function () {
+    return view('pages.privacy');
+})->name('privacy');
+
+Route::get('faq', function () {
+    return view('pages.faq');
+})->name('faq');
+
+Route::get('rule', function () {
+    return view('pages.rule');
+})->name('rule');
 
 Route::get('language/{language}', [HomeController::class, 'changeLanguage'])->name('language');
 
@@ -186,7 +207,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('checkout/json/wards/{id}', [CheckoutController::class, 'getWards'])->name('checkout.wards');
 
     // User
-    Route::get('user', [ProfileController::class, 'profile'])->name('profile');
     Route::get('user/orderhistory', [OrderController::class, 'index'])->name('user.orderhistory');
     Route::get('user/orderdetails/{id}', [OrderController::class, 'getDetails'])->name('user.orderdetails');
     Route::delete('user/ordercancel/{id}', [OrderController::class, 'cancel'])->name('user.ordercancel');
@@ -196,22 +216,11 @@ Route::group(['middleware' => ['auth']], function () {
     // rating
     Route::get('user/rate/{id}', [RatingController::class, 'index'])->name('user.rate');
     Route::post('user/rate/{id}/create', [RatingController::class, 'create'])->name('user.rate.create');
-/*
-    // Profile
-    Route::get('profile', [ProfileController::class, 'editProfile'])->name('profile');
-    Route::patch('profile', [ProfileController::class, 'updateProfile'])->name('profile.update');
-    Route::get('profile/change-password', [ProfileController::class, 'editPassword'])->name('password.edit');
-    Route::put('profile/change-password', [ProfileController::class, 'updatePassword'])
-        ->name('profile.password.update');
 
-    // User
-    Route::get('user', [UserController::class, 'index'])->name('user');
-    Route::get('user/purchase', [UserController::class, 'purchase'])->name('user.purchase');
-    Route::get('user/order/{id}', [UserController::class, 'orderDetail'])->name('user.purchase.details');
-    Route::post('user/order/{id}/cancel', [UserController::class, 'orderCancel'])->name('user.purchase.cancel');
-    //Rating
-    Route::get('user/rating', [RatingController::class, 'index'])->name('user.rating');
-    Route::get('user/rating/{order_id}', [RatingController::class, 'showAllOrder'])->name('user.rating.view');
-    Route::post('user/rating/{order_items_id}', [RatingController::class, 'addRating'])->name('user.rating.send');
-    */
+    // Profile
+    Route::get('user', [ProfileController::class, 'editProfile'])->name('profile');
+    Route::patch('user', [ProfileController::class, 'updateProfile'])->name('user.update');
+    Route::get('user/change-password', [ProfileController::class, 'editPassword'])->name('user.password.edit');
+    Route::put('user/change-password', [ProfileController::class, 'updatePassword'])
+        ->name('user.password.update');
 });
